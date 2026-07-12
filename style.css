@@ -1,0 +1,1780 @@
+/* ==========================================
+   RESET GLOBALE & VARIABILI
+   ========================================== */
+:root {
+    --bg-dark: #121214;       /* Grigio scuro di sfondo principale */
+    --bg-card: #1a1a1e;       /* Grigio leggermente più chiaro per navbar/card */
+    --primary-red: #ff2a2a;   /* Rosso acceso energico */
+    --text-white: #ffffff;    /* Bianco puro per i titoli */
+    --text-gray: #a1a1aa;     /* Grigio chiaro per testi secondari */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #121214;
+    color: var(--text-white);
+    font-family: 'Poppins', sans-serif; /* O il tuo font attuale */
+
+    /* 🛠️ INCOLLA E FORZA QUESTE 4 RIGHE QUI SOTTO */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Costringe la pagina a essere alta almeno quanto lo schermo */
+}
+
+/* ==========================================
+   STILE NAVBAR (HEADER) - REBUILT
+   ========================================== */
+.main-header {
+    position: sticky !important; /* Mantiene la barra in alto durante lo scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 99999 !important;
+    background: rgba(18, 18, 20, 0.7); 
+    backdrop-filter: blur(12px);       
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition-smooth);
+}
+
+/* Il contenitore interno - Forziamo la riga orizzontale */
+.navbar-container {
+    display: flex !important;           /* FORZA la disposizione in riga */
+    flex-direction: row !important;     /* Impedisce l'impilamento verticale */
+    justify-content: space-between !important; /* Separa Logo, Menu e IP */
+    align-items: center !important;     /* Centra tutto verticalmente */
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    height: 80px !important;            /* Blocca l'altezza dell'header */
+    box-sizing: border-box;
+}
+
+/* LOGO */
+.nav-logo {
+    display: flex !important;
+    align-items: center !important;
+    height: 100% !important;
+    min-width: 150px; /* Evita che il logo si rimpicciolisca troppo */
+    text-decoration: none;
+}
+
+/* L'immagine del logo - Blindata */
+.nav-logo img {
+    height: 42px !important;       /* Altezza fissa tassativa */
+    max-height: 42px !important;   /* Sicurezza anti-sminchiamento */
+    width: auto !important;        /* Mantiene le proporzioni */
+    display: block !important;
+    object-fit: contain !important;
+    transition: var(--transition-smooth);
+}
+
+/* Effetto Hover sul logo */
+.nav-logo:hover img {
+    transform: scale(1.05);
+}
+
+/* LINK DI NAVIGAZIONE */
+.nav-menu {
+    display: flex;
+    gap: 2.5rem;
+    margin-left: 200px;
+}
+
+.nav-link {
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: var(--text-gray);
+    position: relative;
+    padding: 0.5rem 0;
+    transition: var(--transition-smooth);
+}
+
+.nav-link:hover, .nav-link.active {
+    color: var(--text-white);
+}
+
+/* Animazione linea rossa sotto i link */
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary-red);
+    transition: var(--transition-smooth);
+    transform: translateX(-50%);
+}
+
+.nav-link:hover::after, .nav-link.active::after {
+    width: 100%;
+}
+
+/* BOTTONE IP COPIA */
+.ip-button {
+    background-color: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.6rem 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: var(--transition-smooth);
+    margin-left: 170px;
+}
+
+.ip-text {
+    color: var(--text-white);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.ip-badge {
+    background-color: var(--primary-red);
+    color: var(--text-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+}
+
+/* Effetti Hover Bottone IP */
+.ip-button:hover {
+    border-color: var(--primary-red);
+    box-shadow: 0 0 15px rgba(255, 42, 42, 0.2);
+    transform: translateY(-2px);
+}
+
+.ip-button:hover .ip-badge {
+    background-color: var(--text-white);
+    color: var(--bg-dark);
+}
+/* ==========================================
+   STILE HERO SECTION
+   ========================================== */
+/* MODIFICA QUESTO NEL TUO CSS */
+.hero-section {
+    position: relative;             /* Ancoraggio elementi interni */
+    min-height: 85vh;              /* Altezza della sezione */
+    display: flex;                  /* Attiva il box flessibile */
+    align-items: center;            /* Centra il contenuto in verticale */
+    overflow: hidden;               /* Taglia le luci fuori schermo */
+    background-color: #121214;      /* Grigio scuro originale di base */
+}
+
+/* Spostiamo l'immagine qui sotto, così si attiva SOLO se siamo nella Home */
+#home-page .hero-section {
+    background-image: url('img-hero3.png'); /* L'immagine si carica solo nella Home */
+    background-position: calc(100% + 100px) center; /* Posiziona l'immagine */
+    background-repeat: no-repeat;   /* Impedisce la ripetizione */
+    background-size: cover;         /* Copre l'intera altezza */
+}
+
+/* MODIFICA QUESTO NEL TUO CSS */
+/* Aggiungendo #home-page prima, la sfumatura esisterà SOLO nella Home */
+#home-page .hero-section::before {
+    content: '';                    /* Genera l'elemento virtuale del velo */
+    position: absolute;             /* Lo sovrappone sopra alla sezione */
+    top: 0;                         /* Parte dal limite superiore */
+    left: 0;                        /* Parte dal limite sinistro */
+    width: 100%;                    /* Esteso su tutta la larghezza */
+    height: 100%;                   /* Esteso su tutta l'altezza */
+    /* Il gradiente originale che si attiva solo nella pagina principale */
+    background: linear-gradient(to right, #121214 0%, #121214 35%, rgba(18, 18, 20, 0.3) 70%, rgba(18, 18, 20, 0) 100%),
+                linear-gradient(to bottom, #121214 0%, transparent 15%, transparent 85%, #121214 100%);
+    z-index: 1;                     /* Sopra lo sfondo, sotto ai testi */
+}
+
+.hero-container {
+    max-width: 1300px;              /* Larghezza massima del contenitore */
+    margin: 0 auto;                 /* Centra il blocco nella pagina */
+    padding: 2rem;                  /* Spazio di distacco dai bordi */
+    width: 100%;                    /* Occupa tutto lo spazio orizzontale */
+    z-index: 10;                    /* Spinge i testi sopra al velo sfumato */
+}
+
+/* COLONNA SINISTRA: TESTI */
+.hero-content {
+    max-width: 600px;               /* Contiene il testo per non farlo allargare troppo */
+}
+
+.hero-title {
+    font-size: 4rem;                /* Grandezza del titolo principale */
+    font-weight: 700;                /* Spessore del carattere in grassetto */
+    line-height: 1.1;               /* Spaziatura verticale tra le righe */
+    margin-bottom: 1.5rem;          /* Spazio vuoto sotto al titolo */
+    color: var(--text-white);       /* Colore bianco del testo */
+}
+
+.hero-title .brand-color {
+    color: var(--primary-red);      /* Applica il rosso della variabile */
+    text-shadow: 0 0 30px rgba(255, 42, 42, 0.3); /* Effetto neon sul testo rosso */
+}
+
+.hero-subtitle {
+    font-size: 1.1rem;              /* Grandezza del testo di descrizione */
+    color: var(--text-gray);        /* Colore grigio chiaro leggibile */
+    line-height: 1.6;               /* Altezza della riga di lettura */
+    margin-bottom: 2.5rem;          /* Spazio prima dei pulsanti */
+    max-width: 500px;               /* Blocca la larghezza del paragrafo */
+}
+
+/* BOTTONI HERO */
+.hero-buttons {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.btn {
+    padding: 0.9rem 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    transition: var(--transition-smooth);
+}
+
+.btn-primary {
+    background-color: var(--primary-red);
+    color: var(--text-white);
+    border: none;
+    box-shadow: 0 4px 20px rgba(255, 42, 42, 0.3);
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 42, 42, 0.5);
+    background-color: #ff4545;
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--text-white);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    border-color: var(--primary-red);
+    background-color: rgba(255, 42, 42, 0.05);
+    transform: translateY(-3px);
+}
+
+/* AMBIENT GLOW (LUCI DI SFONDO) */
+.glow-effect {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(255, 42, 42, 0.15) 0%, rgba(0,0,0,0) 70%);
+    border-radius: 50%;
+    filter: blur(60px);
+    z-index: 1;
+    pointer-events: none; /* Evita che le luci blocchino i click sui bottoni */
+}
+
+.glow-effect.top-left {
+    top: -10%;
+    left: -10%;
+}
+
+.glow-effect.bottom-right {
+    bottom: 10%;
+    right: -10%;
+}
+
+/* ==========================================
+   ANIMAZIONI (KEYFRAMES)
+   ========================================== */
+@keyframes floatAnimation {
+    0% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px); /* Sposta l'immagine su di 15px a metà animazione */
+    }
+    100% {
+        transform: translateY(0px);
+    }
+}
+/* ==========================================
+   STILE SEZIONE FEATURES (CARD)
+   ========================================== */
+.features-section {
+    padding: 5rem 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.features-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    display: grid;
+    /* Crea 3 colonne uguali, ma se lo schermo è piccolo (mobile) le mette una sotto l'altra */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+/* LA CARD ORIGINALE: Rimane ferma per AOS, mantiene le sue dimensioni naturali */
+.feature-card {
+    position: relative;
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    overflow: visible; 
+    background: transparent; 
+}
+
+/* IL BOX GRAFICO: Crea lo sfondo originale e si muove all'hover */
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 16px;
+    z-index: -1; 
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* PREPARIAMO I TESTI E I COMPONENTI A MUOVERSI CON LA STESSA TRANSIZIONE */
+.feature-card h3,
+.feature-card p,
+.feature-card .server-status-info {
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Stile delle icone in cima alle card */
+.card-icon {
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 42, 42, 0.1);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    /* Sincronizziamo il transform dell'icona con il resto della card */
+    transition: transform 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94), background 0.25s ease;
+}
+
+.card-icon i {
+    color: var(--primary-red);
+    font-size: 1.5rem;
+    transition: color 0.25s ease;
+}
+
+/* ==========================================================================
+   IL FIX DEFINITIVO: Tutto si alza insieme alla stessa identica velocità!
+   ========================================================================== */
+.feature-card:hover::before,
+.feature-card:hover .card-icon,
+.feature-card:hover h3,
+.feature-card:hover p {
+    transform: translateY(-6px);
+}
+
+/* Gestione dei colori all'hover (attivati sempre dal guscio) */
+.feature-card:hover::before {
+    border-color: rgba(255, 42, 42, 0.2);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.4);
+}
+
+.feature-card:hover .card-icon {
+    background: var(--primary-red);
+}
+
+.feature-card:hover .card-icon i {
+    color: var(--text-white);
+}
+
+/* Testi delle Card */
+.feature-card h3 {
+    font-size: 1.4rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: var(--text-white);
+}
+
+.feature-card p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* SPECIFICHE CARD STATO (CARD 3) */
+.status-icon {
+    position: relative;
+}
+.server-version-badge {
+    background-color: var(--primary-red);
+    color: var(--text-white);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    transition: var(--transition-smooth);
+    margin-left: 15px;
+}
+
+/* IL PALLINO: Configurazione dinamica totale */
+.pulse-dot {
+    position: absolute;
+    top: -2px;
+    right: -2px;
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: 2px solid var(--bg-card);
+    
+    /* Valori BASE di default se JS non ha ancora risposto (Grigio spento) */
+    background-color: var(--dot-bg, var(--text-gray)); 
+    box-shadow: var(--dot-shadow, none);
+    animation: var(--dot-anim, none);
+    
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* ==========================================================================
+   COLLEGAMENTO DIRETTO CON LE CLASSI DI STATO (JS-COMPATIBLE)
+   Agganciamo le variabili ovunque si trovi la classe nel blocco della card
+   ========================================================================== */
+
+/* 1. SE IL SERVER È ONLINE (Verde + Pulsazione) */
+.status-online,
+.status-online ~ .pulse-dot,
+:has(.status-online) .pulse-dot,
+.server-status-card:has(.status-online) .pulse-dot {
+    color: #2ecc71;
+    --dot-bg: #2ecc71;
+    --dot-shadow: 0 0 8px #2ecc71;
+    --dot-anim: pulseAnimation 1.8s infinite;
+}
+
+/* 2. SE IL SERVER È OFFLINE (Rosso fisso statico) */
+.status-offline,
+.status-offline ~ .pulse-dot,
+:has(.status-offline) .pulse-dot,
+.server-status-card:has(.status-offline) .pulse-dot {
+    color: var(--primary-red);
+    --dot-bg: var(--primary-red);
+    --dot-shadow: 0 0 8px var(--primary-red);
+    --dot-anim: none !important; /* Forza lo stop dell'animazione */
+}
+
+/* 3. IN CARICAMENTO (Grigio statico) */
+.status-loading,
+.status-loading ~ .pulse-dot,
+:has(.status-loading) .pulse-dot {
+    color: var(--text-gray);
+    --dot-bg: var(--text-gray);
+    --dot-shadow: none;
+    --dot-anim: none;
+}
+
+/* INFO TESTUALI E RESTO DEL CSS REPLICA */
+.server-status-info {
+    margin-top: 0.5rem;
+}
+
+#server-status-text {
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+.player-count-box {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-top: 0.5rem;
+}
+
+#player-count {
+    color: var(--primary-red);
+}
+
+.player-max {
+    font-size: 1rem;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+/* ==========================================
+   ANIMAZIONE PULSAZIONE PALLINO VERDE
+   ========================================== */
+@keyframes pulseAnimation {
+    0% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 8px rgba(46, 204, 113, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+    }
+}
+/* ==========================================
+   STILE SEZIONE DISCORD BANNER
+   ========================================== */
+.discord-section {
+    padding: 3rem 2rem 6rem 2rem;
+    position: relative;
+    z-index: 10;
+}
+
+.discord-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    background: #16161a; /* Grigio scurissimo di base */
+    /* Crea un gradiente che simula una luce rossa circolare nell'angolo in basso a destra */
+    background: radial-gradient(circle at 90% 100%, rgba(255, 42, 42, 0.08) 0%, rgba(22, 22, 26, 0) 60%), 
+                linear-gradient(135deg, #16161a 0%, #111114 100%);
+    border: 1px solid rgba(255, 255, 255, 0.03);
+    border-radius: 24px;
+    padding: 3.5rem 4rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 3rem;
+    position: relative;
+    overflow: hidden; /* Taglia l'icona gigante che esce dai bordi */
+}
+
+/* L'icona gigante filigranata sullo sfondo */
+.discord-bg-icon {
+    position: absolute;
+    right: -5%;
+    bottom: -30%;
+    font-size: 25rem;
+    color: rgba(255, 255, 255, 0.015); /* Opacità quasi invisibile (1.5%) */
+    transform: rotate(-15deg);
+    pointer-events: none;
+    z-index: 1;
+}
+
+/* LATO SINISTRO: TESTI */
+.discord-text-content {
+    max-width: 650px;
+    position: relative;
+    z-index: 2; /* Sopra l'icona di sfondo */
+}
+
+.discord-badge {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    background: rgba(255, 42, 42, 0.1);
+    color: var(--primary-red);
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    border-radius: 6px;
+    margin-bottom: 1.2rem;
+}
+
+.discord-text-content h2 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-white);
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.discord-text-content p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 1.05rem;
+}
+
+/* LATO DESTRO: IL MEGA BOTTONE FUTURISTICO */
+.discord-action {
+    position: relative;
+    z-index: 2;
+}
+
+.discord-btn {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2.5rem;
+    background: transparent;
+    color: var(--text-white);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: 2px solid var(--primary-red);
+    border-radius: 12px;
+    white-space: nowrap; /* Impedisce al testo di andare a capo */
+    transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    overflow: hidden;
+}
+
+/* Icona dentro il bottone */
+.discord-btn i {
+    font-size: 1.4rem;
+    transition: transform 0.4s ease;
+}
+
+/* EFFETTI HOVER SUL BOTTONE */
+.discord-btn:hover {
+    background-color: var(--primary-red);
+    box-shadow: 0 0 30px rgba(255, 42, 42, 0.4);
+    transform: scale(1.03); /* Si ingrandisce leggermente */
+}
+
+/* Animazione dell'icona Discord al passaggio del mouse */
+.discord-btn:hover i {
+    transform: rotate(15deg) scale(1.2); /* Ruota e si ingrandisce */
+}
+/* ==========================================
+   STILE SEZIONE MODALITÀ DI GIOCO
+   ========================================== */
+.modes-section {
+    padding: 8rem 2rem 6rem 2rem;   /* Spazio interno sopra, ai lati e sotto */
+    background-color: #121214;      /* Grigio scuro di base del sito */
+    display: flex;                  /* FORZA la sezione a comportarsi come contenitore flessibile */
+    flex-direction: column;         /* Dispone titolo e card in verticale, uno sotto l'altro */
+    align-items: center;            /* CENTRA in modo assoluto tutti i figli (titolo e container) al centro dello schermo */
+    width: 100%;                    /* Costringe la sezione a occupare tutta la larghezza dello schermo */
+    box-sizing: border-box;         /* Include il padding nel calcolo della larghezza per evitare bug */
+}
+
+/* CONTENITORE DEL TITOLO CENTRALE */
+.modes-header {
+    text-align: center;             /* IL FIX: Allinea il testo e lo span rosso esattamente al centro della pagina */
+    margin-bottom: 4rem;            /* Mantiene lo spazio sotto prima delle card */
+    width: 100%;                    /* Costringe il titolo a occupare tutto lo spazio orizzontale per centrarsi */
+}
+
+.modes-header h1 {
+    font-size: 3.5rem;              /* Dimensione generosa per il titolo principale */
+    font-weight: 800;                /* Spessore del font ultra-grassetto */
+    color: var(--text-white);       /* Colore bianco per le prime parole */
+    letter-spacing: -1px;           /* Avvicina leggermente le lettere per un look pro */
+}
+
+/* LA SCRITTA "MODALITÀ" IN ROSSO */
+.modes-header h1 .brand-color {
+    color: var(--primary-red);      /* Applica il rosso della variabile del server */
+    text-shadow: 0 0 30px rgba(255, 42, 42, 0.2); /* Crea un leggerissimo alone rosso attorno */
+}
+
+.modes-container {
+    width: 100%;                    /* Dice al container di usare lo spazio fino al limite massimo */
+    max-width: 1300px;              /* Larghezza massima oltre la quale le card smettono di allargarsi */
+    display: grid;                  /* Attiva la griglia interna per le card */
+    grid-template-columns: repeat(2, 1fr); /* Mantiene le due colonne per Knockout e KitPvP */
+    gap: 2.5rem;                    /* Spazio di distacco tra le card */
+}
+
+/* ==========================================================================
+   IL NUOVO SISTEMA A GUSCIO PER LE MODALITÀ (FIX AOS & HOVER)
+   ========================================================================== */
+
+/* 1. STRUTTURA DEL GUSCIO ESTERNO: Gestisce SOLO la griglia e riceve AOS. 
+   Togliamo sfondi, ombre e bordi per non farli laggare con la libreria */
+.mode-card {
+    background: transparent !important;
+    padding: 0 !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+/* LA REGINA: Dice al guscio esterno di allargarsi su due colonne se dentro c'è la card-main */
+.mode-card:has(.card-main) {
+    grid-column: span 2;
+}
+
+/* 2. IL VERO CORPO DELLA CARD: Qui dentro si sposta tutta la grafica, i padding e le immagini.
+   La transizione risponderà istantaneamente e in modo fluido all'hover */
+.card-body {
+    width: 100%;
+    position: relative;             /* Necessario per posizionare il badge e il velo ::before all'interno */
+    border-radius: 20px;            /* Arrotonda gli angoli delle card */
+    min-height: 380px;              /* Altezza minima per contenere i testi comodamente */
+    padding: 3rem;                  /* Spazio interno tra i bordi e il testo */
+    display: flex;                  /* Attiva flexbox per gestire la disposizione interna */
+    align-items: flex-end;          /* Spinge i testi sempre sul fondo della card */
+    overflow: hidden;               /* Taglia l'immagine di sfondo se esce fuori o il velo */
+    border: 1px solid #121214;      /* Nasconde lo stacco usando il colore del sito */  
+    background-size: cover;         /* Forza l'immagine a coprire l'intera card */
+    background-position: center;    /* Centra l'immagine nella card */
+    box-sizing: border-box;
+    
+    /* Questa transizione rende l'hover burro sia a salire che a scendere, ignorando i blocchi di AOS */
+    transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+}
+
+/* 3. ASSOCIAZIONE DELLE IMMAGINI DI SFONDO AL CORPO INTERNO */
+.card-body.card-main {
+    background-image: url('img-smp.png'); /* Immagine di sfondo per la SMP */
+}
+.card-body.card-knockout {
+    background-image: url('img-knockout.png'); /* Immagine di sfondo per Knockout */
+}
+.card-body.card-pvp {
+    background-image: url('img-kitpvp.png'); /* Immagine di sfondo per il KitPvP */
+}
+
+/* 4. L'EFFETTO SFUMATURA (Spostato sul .card-body) */
+.card-body::before {
+    content: '';                    /* Genera l'elemento virtuale del velo */
+    position: absolute;             /* Lo sovrappone interamente alla card */
+    top: 0; left: 0; width: 100%; height: 100%; /* Copre il 100% dello spazio */
+    background: linear-gradient(to top, rgba(18, 18, 20, 0.95) 0%, rgba(18, 18, 20, 0.4) 60%, transparent 100%); /* Sfuma da nero a trasparente */
+    z-index: 1;                     /* Sta sopra l'immagine, sotto al testo */
+}
+
+/* 5. L'EFFETTO HOVER DEFINITIVO: Quando passi il mouse sul guscio (.mode-card), 
+   il corpo interno (.card-body) si alza con uno zoom pazzesco e morbidissimo */
+.mode-card:hover .card-body {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5); /* Ombra profonda per dare l'effetto di distacco dal fondo */
+}
+
+/* ==========================================================================
+   ELEMENTI INTERNI (Rimasti invariati, cambiano solo i posizionamenti relativi)
+   ========================================================================== */
+
+/* CONTENITORE TESTI (SOPRA IL VELO) */
+.card-text-wrapper {
+    position: relative;             /* Permette di scavalcare il velo nero */
+    z-index: 2;                     /* Porta i testi in primo piano */
+    max-width: 600px;               /* Evita che il testo si allarghi troppo */
+}
+
+.card-text-wrapper h3 {
+    font-size: 2rem;                /* Dimensione del titolo della modalità */
+    color: var(--text-white);       /* Colore bianco per massima leggibilità */
+    margin-bottom: 0.8rem;          /* Distanza tra il titolo e la descrizione */
+    font-weight: 700;                /* Scrittura in grassetto marcato */
+}
+
+.card-text-wrapper p {
+    color: var(--text-gray);        /* Grigio chiaro rilassante per gli occhi */
+    line-height: 1.6;               /* Spaziatura perfetta tra le linee di testo */
+    font-size: 1.05rem;             /* Dimensione di lettura ideale */
+}
+
+/* LO STILE DEI BADGE IN ALTO A SINISTRA (Ancorati relativamente a .card-body ora) */
+.mode-badge {
+    position: absolute;             /* Lo ancora alla card indipendentemente dal testo */
+    top: 2rem;                      /* Distanza dal bordo superiore */
+    left: 2rem;                     /* Distanza dal bordo sinistro */
+    padding: 0.4rem 1rem;           /* Spessore interno del rettangolo */
+    border-radius: 8px;              /* Smussa gli angoli del badge */
+    font-size: 0.8rem;              /* Testo piccolino stile etichetta */
+    font-weight: 700;                /* Scrittura in grassetto */
+    text-transform: uppercase;      /* Forza tutto in maiuscolo */
+    letter-spacing: 1px;            /* Allarga le lettere del badge */
+    z-index: 2;                     /* Lo tiene in primo piano sopra lo sfondo */
+}
+
+/* I TRE COLORI DEI BADGE */
+.badge-gold {
+    background: rgba(212, 175, 55, 0.15); /* Oro molto trasparente di sfondo */
+    color: #d4af37;                 /* Testo color Oro lucido */
+    border: 1px solid rgba(212, 175, 55, 0.3); /* Bordino oro sottile */
+}
+
+.badge-green {
+    background: rgba(46, 204, 113, 0.15); /* Verde lime trasparente di sfondo */
+    color: #2ecc71;                 /* Testo color Verde acceso */
+    border: 1px solid rgba(46, 204, 113, 0.3); /* Bordino verde sottile */
+}
+
+.badge-darkred {
+    background: rgba(139, 0, 0, 0.25); /* Rosso scuro trasparente di sfondo */
+    color: #ff4d4d;                 /* Testo rosso chiaro per farlo risaltare */
+    border: 1px solid rgba(139, 0, 0, 0.4); /* Bordino rosso scuro sottile */
+}
+/* ==========================================
+   NOTIFICA POPUP (TOAST) PER COPIA IP
+   ========================================== */
+.toast-notifica {
+    position: fixed;                /* Lo blocca in un punto fisso dello schermo */
+    bottom: 2rem;                   /* Distanza dal bordo inferiore */
+    right: 2rem;                    /* Distanza dal bordo destro */
+    background-color: #1a1a1e;      /* Grigio scuro coerente con la palette del sito */
+    color: var(--text-white);       /* Testo bianco per massima leggibilità */
+    padding: 1rem 1.5rem;           /* Spessore interno del box del popup */
+    border-radius: 10px;            /* Arrotonda gli angoli del quadratino */
+    border-left: 4px solid var(--primary-red); /* Barra verticale rossa sul lato sinistro */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Ombra pronunciata per staccarlo dallo sfondo */
+    font-weight: 600;                /* Scrittura in grassetto leggero */
+    z-index: 999999;                /* Lo spinge sopra a qualsiasi altro elemento del sito */
+    transform: translateY(100px);   /* Lo nasconde inizialmente sotto il bordo dello schermo */
+    opacity: 0;                     /* Lo rende completamente invisibile all'inizio */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Animazione fluida con effetto molla */
+}
+
+/* Stato attivo: quando JavaScript aggiunge questa classe, il popup salta fuori */
+.toast-notifica.mostra {
+    transform: translateY(0);       /* Riporta il popup nella sua posizione corretta */
+    opacity: 1;                     /* Lo rende totalmente visibile */
+}
+/* ==========================================
+   SEZIONE REGOLAMENTO (ACCORDION)
+   ========================================== */
+.regolamento-section {
+    padding: 6rem 2rem;
+    background-color: #121214;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.regolamento-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.regolamento-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+}
+
+.regolamento-header .brand-color {
+    color: var(--primary-red);
+}
+
+.regolamento-intro {
+    color: var(--text-gray);
+    margin-top: 1rem;
+    max-width: 600px;
+}
+
+/* CONTENITORE FISARMONICA */
+.accordion-container {
+    width: 100%;
+    max-width: 800px; /* Più stretto per facilitare la lettura */
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.accordion-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.accordion-header {
+    padding: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-white);
+    transition: background 0.3s;
+}
+
+.accordion-header:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.accordion-header i.fa-solid {
+    color: var(--primary-red); /* Icone rosse */
+    margin-right: 10px;
+}
+
+.accordion-header .arrow {
+    font-size: 0.9rem;
+    transition: transform 0.3s ease;
+    color: var(--text-gray);
+}
+
+/* CONTENUTO APERTO */
+.accordion-content {
+    max-height: 0; /* Chiuso di default */
+    overflow: hidden;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.accordion-content ul {
+    padding: 1.5rem 2rem;
+    list-style: none;
+}
+
+.accordion-content li {
+    color: var(--text-gray);
+    margin-bottom: 0.8rem;
+    position: relative;
+    padding-left: 1.5rem;
+    line-height: 1.5;
+}
+
+/* Puntino rosso per ogni regola */
+.accordion-content li::before {
+    content: '•';
+    color: var(--primary-red);
+    position: absolute;
+    left: 0;
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+/* STATO ATTIVO (GESTITO DA JS) */
+.accordion-item.active {
+    border-color: rgba(255, 42, 42, 0.3);
+}
+
+.accordion-item.active .arrow {
+    transform: rotate(180deg);
+}
+
+.accordion-item.active .accordion-content {
+    max-height: 1000px; /* Un valore abbastanza alto da contenere il testo */
+}
+/* ==========================================
+   SEZIONE STAFF (CARD 3D SKIN)
+   ========================================== */
+.staff-section {
+    padding: 6rem 2rem;
+    background-color: #121214;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.staff-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.staff-header h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+}
+
+.staff-header .brand-color {
+    color: var(--primary-red);
+}
+
+.staff-intro {
+    color: var(--text-gray);
+    margin-top: 1rem;
+    max-width: 600px;
+}
+
+/* GRIGLIA CONTENITORE CARD */
+.staff-container {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    /* Crea colonne automatiche che si adattano allo schermo (minimo 280px l'una) */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 3rem;
+    justify-items: center;
+}
+
+/* STRUTTURA DELLA CARD */
+.staff-card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    padding: 2.5rem 2rem;
+    width: 100%;
+    max-width: 320px;
+    text-align: center;
+    position: relative;
+    overflow: visible; /* Permette alla testa della skin di sbordare leggermente all'hover se si vuole */
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* EFFETTO HOVER VOLANTE */
+.staff-card:hover {
+    transform: translateY(-10px);
+    background: rgba(255, 255, 255, 0.04);
+}
+
+/* ANIMAZIONE DELLA SKIN COINVOLTA */
+.staff-avatar img {
+    height: 160px;
+    object-fit: contain;
+    transition: transform 0.4s ease;
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5)); /* Ombra sotto la skin */
+}
+
+.staff-card:hover .staff-avatar img {
+    transform: scale(1.1); /* Zooma e solleva la skin quando ci passi sopra */
+}
+
+/* INFO TESTUALI */
+.staff-info h3 {
+    font-size: 1.5rem;
+    color: var(--text-white);
+    margin: 1.5rem 0 0.5rem 0;
+    font-weight: 700;
+}
+
+.staff-discord {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    margin-top: 1rem;
+}
+
+.staff-discord i {
+    color: #5865F2; /* Colore ufficiale del brand Discord */
+    margin-right: 5px;
+}
+
+/* BADGE DEI RUOLI */
+.role-badge {
+    display: inline-block;
+    padding: 0.3rem 1rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+/* COLORI DEI RUOLI */
+.role-founder {
+    background: rgba(255, 42, 42, 0.15);
+    color: #ff2a2a;
+    border: 1px solid rgba(255, 42, 42, 0.3);
+}
+
+.role-owner {
+    background: rgba(255, 63, 63, 0.301);
+    color: #ff6969;
+    border: 1px solid rgba(255, 63, 63, 0.301);
+}
+
+.role-srhelper {
+    background: rgba(46, 56, 204, 0.15);
+    color: #2e4bcc;
+    border: 1px solid rgba(46, 56, 204, 0.15);
+}
+.role-trainee {
+    background: rgba(99, 99, 99, 0.15);
+    color: #999999;
+    border: 1px solid rgba(99, 99, 99, 0.15);
+}
+/* COLORI DEI BORDI ALL'HOVER (ILLUMINAZIONE SPECIFICA) */
+.staff-card.border-red:hover { border-color: rgba(255, 42, 42, 0.5); box-shadow: 0 10px 30px rgba(255, 42, 42, 0.05); }
+.staff-card.border-lightred:hover { border-color: rgba(214, 64, 64, 0.5); box-shadow: 0 10px 30px rgba(52, 152, 219, 0.05); }
+.staff-card.border-blue:hover { border-color: rgba(46, 56, 204, 0.5); box-shadow: 0 10px 30px rgba(46, 204, 113, 0.05); }
+/*---SEZIONE STORE COMING SOON---*/
+.coming-soon-section {
+    padding: 6rem 2rem;
+    background-color: #121214;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.coming-soon-container {
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    gap: 1rem;
+    justify-items: center;
+}
+.coming-soon h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    color: var(--text-white);
+    text-align: center;
+}
+.coming-soon .brand-color {
+    color: var(--primary-red);
+}
+.coming-soon-text {
+    color: var(--text-gray);
+    margin-top: 1rem;
+    max-width: 600px;
+    text-align: center;
+}
+
+/* ==========================================
+   STILE FOOTER (PIÈ DI PAGINA)
+   ========================================== */
+.main-footer {
+    margin-top: auto; /* Dice al footer di prendersi tutto lo spazio vuoto sopra di sé, spingendosi sul fondo */
+    background-color: #0b0b0c;      /* Un grigio ancora più scuro per staccarsi dal corpo del sito */
+    padding: 5rem 2rem 3rem 2rem;   /* Spazi interni sopra, ai lati e sotto */
+    border-top: 1px solid rgba(255, 255, 255, 0.03); /* Sottile linea superiore di divisione */
+    width: 100%;
+    box-sizing: border-box;
+    /* 🛠️ INCOLLA QUESTE RIGHE DI SICUREZZA QUI SOTTO */
+    clear: both;                    /* Interrompe qualsiasi elemento fluttuante precedente */
+    display: block;                 /* Costringe il footer a comportarsi come un blocco standard */
+    width: 100%;                    /* Forza la larghezza intera dello schermo */
+    box-sizing: border-box;
+    /* 🛠️ MODIFICA QUESTA RIGA AGGIUNGENDO LO SPAZIO */
+    margin-top: calc(auto + 5rem); 
+    /* Nota: Se il tuo editor ti segnala errore su calc(auto), usa semplicemente la riga qui sotto: */
+    margin-top: 6rem; /* Crea un ampio distacco dalla sezione Discord/Staff sovrastante */
+}
+
+.footer-container {
+    max-width: 1200px;              /* Larghezza massima del footer */
+    margin: 0 auto;                 /* Centra il footer nello schermo */
+    display: grid;                  /* Attiva la griglia */
+    /* Divide in 3 colonne sui PC, ma diventa a colonna singola sui telefoni grazie ad auto-fit */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    gap: 4rem;                  /* Distanza abbondante tra le colonne */
+}
+
+.footer-column h3 {
+    color: var(--text-white);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;          /* Spazio sotto i titoli delle colonne */
+    position: relative;
+}
+
+/* COLONNA BRAND / LOGO */
+.footer-logo-link {
+    text-decoration: none;          /* Rimuove qualsiasi linea dal link del logo */
+    display: inline-block;          /* Permette di gestire correttamente i margini */
+    margin-bottom: 1.5rem;          /* Spazio vuoto tra il logo e la descrizione sotto */
+}
+
+.footer-logo {
+    height: 50px;                   /* Altezza del logo (cambiala per farlo grande quanto vuoi) */
+    width: auto;                    /* Mantiene le proporzioni corrette dell'immagine */
+    object-fit: contain;            /* Evita distorsioni */
+    display: block;
+}
+
+.footer-brand p {
+    color: var(--text-gray);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.footer-brand .copyright {
+    margin-top: 2rem;
+    font-size: 0.85rem;
+    opacity: 0.5;                   /* Rende il copyright molto discreto */
+}
+
+/* COLONNA LINK RAPIDI */
+.footer-links ul {
+    list-style: none;               /* Rimuove i pallini della lista */
+    padding: 0;
+    margin: 0;
+}
+
+.footer-links li {
+    margin-bottom: 0.8rem;          /* Distanza verticale tra i link */
+}
+
+.footer-links a {
+    color: var(--text-gray);
+    text-decoration: none;          /* RIMOSSA LA LINEETTA DEI LINK */
+    font-size: 0.95rem;
+    transition: color 0.3s ease;    /* Transizione morbida al passaggio del mouse */
+}
+
+.footer-links a:hover {
+    color: var(--primary-red);      /* Il link diventa rosso quando ci passi sopra */
+}
+
+/* COLONNA SOCIAL */
+.footer-social p {
+    color: var(--text-gray);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.social-icons {
+    display: flex;
+    gap: 1rem;                      /* Spazio tra un'icona social e l'altra */
+}
+
+.social-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 45px;
+    height: 45px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 10px;            /* Angoli arrotondati stile icone moderne */
+    color: var(--text-white);
+    font-size: 1.2rem;
+    text-decoration: none;          /* RIMOSSA LA LINEETTA ANCHE DALLE ICONE */
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* EFFETTI CROMATICI SPECIFICI ALL'HOVER DI OGNI SOCIAL */
+.social-icon.discord:hover {
+    background: #5865F2;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(88, 101, 242, 0.4);
+}
+
+.social-icon.youtube:hover {
+    background: #cc0000;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(204, 0, 0, 0.4);
+}
+
+.social-icon.tiktok:hover {
+    background: #000000;
+    border-color: #ff0050;
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(255, 0, 80, 0.4);
+}
+
+.social-icon.twitch:hover {
+    background: linear-gradient(45deg, #772CE8 50%, #9146FF 100%);
+    color: #fff;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(110, 0, 133, 0.4);
+}
+.hamburger-btn {
+    display: none !important;
+    align-items: center;
+    justify-content: center;
+     background: transparent !important;
+    border: none !important;
+    cursor: pointer;
+    padding: 0.5rem;
+    z-index: 100000;
+        
+    /* Forza le dimensioni del pulsante */
+     width: 40px;
+    height: 40px;
+}
+/* Le tre linee dentro il bottone */
+.hamburger-btn span {
+    width: 100%;
+    height: 3px;
+    background-color: white; /* Puoi metterlo anche arancione #DB862B se preferisci! */
+    border-radius: 3px;
+    transition: all 0.3s ease; /* Servirà per le future animazioni */
+}
+/* ==========================================================================
+   REGOLE PER MOBILE (Schermi inferiori a 768px)
+   ========================================================================== */
+@media (max-width: 768px) {
+    /* Mostriamo il bottone ad hamburger sul telefono */
+/* Mostriamo il bottone ad hamburger sul telefono e lo formattiamo */
+/* Il bottone contenitore dell'hamburger */
+    .hamburger-btn {
+        display: flex !important;
+        flex-direction: column;   /* Dispone gli span in verticale */
+        justify-content: space-between; /* Distanzia le 3 linee in modo uniforme */
+        width: 30px;              /* Larghezza delle linee */
+        height: 20px;             /* Altezza totale del blocco delle 3 linee */
+        background: transparent !important;
+        border: none !important;
+        cursor: pointer;
+        padding: 0 !important;
+        z-index: 100000;
+        box-sizing: border-box;
+    }
+
+    /* Le 3 lineette effettive (gli span interni) */
+    .hamburger-btn span {
+        display: block;
+        width: 100%;
+        height: 3px;              /* Spessore di ogni singola linea */
+        background-color: var(--text-white); /* Colore delle linee */
+        border-radius: 2px;       /* Arrotonda leggermente i bordi delle linee */
+        transition: var(--transition-smooth); /* Pronto per future animazioni a X */
+        transform-origin: center;
+    }
+    /*---ANIMAZIONE A X */
+    .hamburger-btn.active span:nth-child(1) {
+        transform: translateY(8.5px) rotate(45deg);
+    }
+    /* 2. La linea centrale scompare (opacità a zero e si rimpicciolisce) */
+    .hamburger-btn.active span:nth-child(2) {
+        opacity: 0;
+        transform: scale(0);
+    }
+    /* 3. La terza linea ruota verso l'alto di 45 gradi e sale al centro */
+    .hamburger-btn.active span:nth-child(3) {
+        transform: translateY(-8.5px) rotate(-45deg);
+    }
+
+    /* Modifichiamo il contenitore per non far stringere logo e bottone */
+    .navbar-container {
+        padding: 0 1.5rem;
+    }
+
+    /* Nascondiamo temporaneamente il menu classico da PC.
+       Nel prossimo step lo trasformeremo in una tendina a comparsa vertical-flex */
+    .nav-menu {
+        display: none; 
+    }
+
+    /* Nascondiamo il bottone IP copia per non sovrapporre tutto nello schermo del telefono.
+       (Se vorrai, potremo inserirlo direttamente dentro la tendina dell'hamburger) */
+    .ip-button {
+        display: none !important;
+    }
+    /* LA TENDINA CORRETTA E CALIBRATA */
+    .nav-menu {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 2rem !important;
+        
+        /* Posizionamento fisso assoluto */
+        position: fixed;
+        top: 80px; /* Deve coincidere esattamente con l'altezza della tua navbar */
+        left: 0;
+        
+        /* Forziamo la larghezza totale a stare dentro lo schermo */
+        width: 100vw;              /* Prende la larghezza esatta dello schermo visibile */
+        max-width: 100%;           /* Evita l'overflow laterale */
+        height: calc(100vh - 80px); /* Tutta l'altezza rimanente */
+        
+        /* Sfondo e padding controllati */
+        background: rgba(18, 18, 20, 0.98);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        padding: 3rem 2rem;
+        
+        /* IMPEDISCE AL PADDING DI ALLARGARE IL MENU */
+        box-sizing: border-box !important; 
+        
+        /* Reset di allineamenti che potrebbero ereditare dal desktop */
+        margin: 0 !important;
+        align-items: center !important; /* Centra i link orizzontalmente */
+        justify-content: flex-start !important;
+
+        /* Animazione di comparsa */
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+        z-index: 99998;
+    }
+
+    /* QUANDO È ATTIVA */
+    .nav-menu.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+    }
+
+    /* Sistemiamo i link interni per farli risaltare sul telefono */
+    .nav-link {
+        font-size: 1.3rem !important; /* Più grandi, facili da cliccare con il dito */
+        width: 100%;
+        text-align: center;
+        padding: 0.8rem 0;
+    }
+
+    /* Eliminiamo la linea rossa sotto che sui telefoni sta male e usiamo un cambio colore */
+    .nav-link::after {
+        display: none !important;
+    }
+    .nav-link:hover, .nav-link.active {
+        color: var(--primary-red) !important;
+    }
+    /* ==========================================================================
+       HERO SECTION MOBILE
+       ========================================================================== */
+
+    .hero-section {
+        min-height: 70vh !important; /* Riduce l'altezza per non occupare tutto lo schermo */
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        text-align: center !important; /* Centra tutti i testi su mobile */
+    }
+
+    #home-page .hero-section {
+        background-position: 75% !important; /* Centra l'immagine di sfondo */
+        background-size: cover !important;
+    }
+
+    /* Cambiamo il gradiente: ora scurisce dall'alto verso il basso per proteggere il testo */
+    #home-page .hero-section::before {
+        background: linear-gradient(to bottom, 
+            rgba(18, 18, 20, 0.85) 0%, 
+            rgba(18, 18, 20, 0.7) 50%, 
+            #121214 100%) !important;
+    }
+
+    .hero-container {
+        padding: 2rem 1.5rem !important;
+    }
+
+    .hero-content {
+        max-width: 100% !important;
+        margin: 0 auto !important;
+    }
+
+    /* Rimpiccioliamo il titolo da 4rem per non farlo andare a capo in 5 righe */
+    .hero-title {
+        font-size: 2.2rem !important; 
+        line-height: 1.2 !important;
+        margin-bottom: 1rem !important;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem !important;
+        margin-bottom: 2rem !important;
+        max-width: 100% !important;
+    }
+
+    /* Mettiamo i bottoni uno sotto l'altro o ben distanziati */
+    .hero-buttons {
+        flex-direction: column !important; /* Incolonna i due bottoni */
+        gap: 1rem !important;
+        width: 100%;
+        max-width: 320px; /* Evita che i bottoni diventino larghi quanto tutto lo schermo */
+        margin: 0 auto !important; /* Centra il blocco bottoni */
+    }
+
+    .btn {
+        width: 100% !important; /* Forza i bottoni a prendere tutta la larghezza del contenitore */
+        justify-content: center !important; /* Centra il testo all'interno del bottone */
+        padding: 0.8rem 1.5rem !important;
+    }
+
+    /* Rimpiccioliamo i bagliori per evitare artefatti grafici fastidiosi sui display piccoli */
+    .glow-effect {
+        width: 200px !important;
+        height: 200px !important;
+        opacity: 0.5;
+    }
+    /* ==========================================================================
+       FEATURE CARDS MOBILE INTERNE
+       ========================================================================== */
+
+    /* Riduciamo il mega padding della sezione per i display piccoli */
+    .features-section {
+        padding: 3rem 1rem !important;
+    }
+
+    /* Riavviciniamo le card riducendo il gap */
+    .features-container {
+        gap: 1.5rem !important;
+        grid-template-columns: 1fr !important; /* Forza la colonna singola pulita */
+    }
+
+    /* Rendiamo le card leggermente più compatte internamente */
+    .feature-card {
+        padding: 2rem 1.5rem !important;
+    }
+
+    /* Calibriamo il bordo del pallino di stato sul background mobile */
+    .pulse-dot {
+        border-color: var(--bg-card) !important;
+    }
+
+    /* ==========================================================================
+       DISATTIVAZIONE HOVER TRASLAZIONE SU MOBILE (EVITA GLITCH AL TOCCO)
+       ========================================================================== */
+    .feature-card:hover::before,
+    .feature-card:hover .card-icon,
+    .feature-card:hover h3,
+    .feature-card:hover p {
+        transform: none !important; /* Elimina il salto in alto che sui telefoni bugga */
+    }
+
+    /* Manteniamo comunque il cambio colore del bordo e dell'icona per dare feedback al click */
+    .feature-card:hover::before {
+        border-color: rgba(255, 42, 42, 0.2) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important;
+    }
+    /* ==========================================================================
+       SEZIONE DISCORD MOBILE
+       ========================================================================== */
+
+    .discord-section {
+        padding: 2rem 1rem 4rem 1rem !important; /* Riduce la spaziatura esterna */
+    }
+
+    .discord-container {
+        flex-direction: column !important; /* Incolonna testi e bottone in verticale */
+        text-align: center !important;     /* Centra la comunicazione sul telefono */
+        padding: 2.5rem 1.5rem !important; /* Rende il box interno compatto */
+        gap: 2rem !important;
+        
+        /* Spostiamo il gradiente radiale al centro in basso per adattarsi alla colonna */
+        background: radial-gradient(circle at 50% 100%, rgba(255, 42, 42, 0.08) 0%, rgba(22, 22, 26, 0) 70%), 
+                    linear-gradient(135deg, #16161a 0%, #111114 100%) !important;
+    }
+
+    /* Sistemiamo i testi */
+    .discord-text-content {
+        max-width: 100% !important;
+    }
+
+    .discord-text-content h2 {
+        font-size: 1.8rem !important; /* Titolo proporzionato allo schermo del telefono */
+        line-height: 1.2 !important;
+    }
+
+    .discord-text-content p {
+        font-size: 0.95rem !important;
+    }
+
+    /* Adattiamo il Mega Bottone per il touch dello smartphone */
+    .discord-action {
+        width: 100%;
+        max-width: 300px; /* Evita che diventi un rettangolo gigante */
+        margin: 0 auto;
+    }
+
+    .discord-btn {
+        white-space: normal !important; /* Permette al testo di adattarsi se lo schermo è minuscolo */
+        justify-content: center !important; /* Centra icona e testo nel bottone */
+        padding: 1rem 1.8rem !important;
+        font-size: 1rem !important;
+    }
+
+    /* Spostiamo l'icona gigante filigranata al centro per non rompere il bilanciamento */
+    .discord-bg-icon {
+        right: 50% !important;
+        bottom: -20% !important;
+        transform: translateX(50%) rotate(-15deg) !important;
+        font-size: 18rem !important; /* Leggermente più piccola */
+    }
+    /* ==========================================================================
+       FOOTER MOBILE
+       ========================================================================== */
+
+    .main-footer {
+        padding: 3rem 1.5rem 2rem 1.5rem !important; /* Compattiamo gli spazi verticali */
+        margin-top: 4rem !important; /* Riduciamo leggermente il distacco su schermi piccoli */
+    }
+
+    .footer-container {
+        /* Cambiamo la griglia in una colonna singola centrata */
+        grid-template-columns: 1fr !important; 
+        gap: 2.5rem !important; /* Riduciamo la distanza tra i blocchi rimasti */
+        text-align: center !important;
+    }
+
+    /* 1. SEZIONE NAVIGAZIONE ELIMINATA */
+    .footer-links {
+        display: none !important; /* Rimuove completamente i link duplicati */
+    }
+
+    /* 2. CENTRAGGIO COLONNA BRAND / LOGO */
+    .footer-brand {
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Centra logo e testo */
+    }
+
+    .footer-logo {
+        margin: 0 auto 1.5rem auto !important; /* Forza il logo al centro */
+    }
+
+    .footer-brand .copyright {
+        margin-top: 1.5rem !important;
+    }
+
+    /* 3. CENTRAGGIO SOCIAL */
+    .social-icons {
+        justify-content: center !important; /* Allinea le icone al centro della riga */
+    }
+    /* ==========================================================================
+       SEZIONE MODALITÀ MOBILE
+       ========================================================================== */
+
+    .modes-section {
+        padding: 4rem 1rem 3rem 1rem !important; /* Riduciamo i mega spazi verticali */
+    }
+
+    .modes-header {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .modes-header h1 {
+        font-size: 2.2rem !important; /* Ridimensioniamo il titolo principale */
+        letter-spacing: normal !important;
+        padding-bottom: 50px;
+    }
+
+    /* FORZIAMO LA GRIGLIA A UNA SOLA COLONNA */
+    .modes-container {
+        grid-template-columns: 1fr !important; 
+        gap: 1.5rem !important; /* Riduciamo il distacco tra le card */
+    }
+
+    /* DISATTIVIAMO LO SPAN DEL CORPO PRINCIPALE (Ora sono tutte larghe 1 colonna) */
+    .mode-card:has(.card-main) {
+        grid-column: span 1 !important;
+    }
+
+    /* ADATTIAMO IL CORPO DELLA CARD */
+    .card-body {
+        min-height: 280px !important; /* Abbassiamo l'altezza minima per gli schermi piccoli */
+        padding: 2rem 1.5rem !important; /* Più spazio interno per i testi */
+        align-items: flex-end !important;
+    }
+
+    /* RIPOSIZIONIAMO I BADGE IN ALTO A SINISTRA */
+    .mode-badge {
+        top: 1.2rem !important;
+        left: 1.2rem !important;
+        padding: 0.3rem 0.7rem !important;
+        font-size: 0.7rem !important;
+    }
+
+    /* OTTIMIZZIAMO I TESTI DELLE CARD */
+    .card-text-wrapper h3 {
+        font-size: 1.5rem !important; /* Titolo leggibile ma compatto */
+        margin-bottom: 0.5rem !important;
+    }
+
+    .card-text-wrapper p {
+        font-size: 0.95rem !important;
+        line-height: 1.5 !important;
+    }
+
+    /* ==========================================================================
+       DISATTIVAZIONE HOVER VERTICALE SU MOBILE (EVITA GLITCH AL TOCCO)
+       ========================================================================== */
+    .mode-card:hover .card-body {
+        transform: none !important; /* Elimina il salto di 8px che sul touch si blocca */
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4) !important; /* Manteniamo solo una leggera ombra */
+    }
+    /* ==========================================================================
+       SEZIONE REGOLAMENTO MOBILE
+       ========================================================================== */
+
+    .regolamento-section {
+        padding: 4rem 1rem !important; /* Più respiro laterale sul display */
+    }
+
+    .regolamento-header {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .regolamento-header h1 {
+        font-size: 2.2rem !important; /* Ridimensiona il titolo del regolamento */
+    }
+
+    .regolamento-intro {
+        font-size: 0.95rem !important;
+        padding: 0 0.5rem;
+    }
+
+    /* CALIBRAZIONE FISARMONICA MOBILE */
+    .accordion-header {
+        padding: 1.2rem 1rem !important; /* Più spazio alle scritte riducendo i bordi */
+        font-size: 1.05rem !important;    /* Adatta il testo della barra principale */
+    }
+
+    .accordion-content ul {
+        padding: 1rem 1.2rem !important; /* Riduce il rientro per non comprimere le regole */
+    }
+
+    .accordion-content li {
+        font-size: 0.95rem !important; /* Ottimizza la lettura delle regole lunghe */
+        margin-bottom: 1rem !important; /* Distanzia leggermente di più le regole tra loro */
+        padding-left: 1.2rem !important;
+    }
+
+    /* Rimuoviamo l'hover persistente che sui telefoni rimane attivo dopo il tocco */
+    .accordion-header:hover {
+        background: transparent !important; 
+    }
+    
+    /* Manteniamo un feedback visivo di apertura solo sulla card attiva */
+    .accordion-item.active .accordion-header {
+        background: rgba(255, 42, 42, 0.03) !important;
+    }
+    /* ==========================================================================
+       SEZIONE STAFF MOBILE
+       ========================================================================== */
+
+    .staff-section {
+        padding: 4rem 1rem 3rem 1rem !important; /* Spazi verticali ridotti e respiro laterale */
+    }
+
+    .staff-header {
+        margin-bottom: 2.5rem !important;
+    }
+
+    .staff-header h1 {
+        font-size: 2.2rem !important; /* Titolo staff ridimensionato */
+    }
+
+    .staff-intro {
+        font-size: 0.95rem !important;
+    }
+
+    /* FORZIAMO LA COLONNA SINGOLA E COMPATTIAMO IL GAP */
+    .staff-container {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important; /* Riavvicina le card verticalmente */
+    }
+
+    .staff-card {
+        padding: 2rem 1.5rem !important; /* Interno leggermente più compatto */
+        max-width: 300px !important; /* Evita che la card diventi troppo tozza */
+    }
+
+    /* SCALIAMO LE SKIN DI MINECRAFT PER SCHERMI PICCOLI */
+    .staff-avatar img {
+        height: 130px !important; /* Leggermente più basse per non spingere tutto giù */
+    }
+
+    /* DISATTIVIAMO L'HOVER VOLANTE SU MOBILE SU TUTTI I COMPONENTI */
+    .staff-card:hover {
+        transform: none !important; /* Evita che la card rimanga sollevata al tocco */
+        background: rgba(255, 255, 255, 0.02) !important;
+    }
+
+    .staff-card:hover .staff-avatar img {
+        transform: none !important; /* Blocca lo zoom della skin al tocco */
+    }
+
+    /* MANTENIAMO SOLO IL BAGLIORE SUI BORDI PER IL FEEDBACK DEL CLICK */
+    .staff-card.border-red:hover { border-color: rgba(255, 42, 42, 0.4) !important; }
+    .staff-card.border-lightred:hover { border-color: rgba(214, 64, 64, 0.4) !important; }
+    .staff-card.border-blue:hover { border-color: rgba(46, 56, 204, 0.4) !important; }
+    /* ==========================================================================
+       SEZIONE STORE COMING SOON MOBILE
+       ========================================================================== */
+
+    .coming-soon-section {
+        padding: 4rem 1rem !important; /* Spazio verticale ridotto per evitare scroll inutili */
+    }
+
+    .coming-soon h1 {
+        font-size: 2.2rem !important; /* Ridimensiona il titolo principale */
+        line-height: 1.2 !important;
+    }
+
+    .coming-soon-text {
+        font-size: 0.95rem !important;
+        padding: 0 0.5rem;
+    } 
+}

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperMC - Regolamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="hypermc_icon.png">
+</head>
+<body id="mod-page  ">
+    <header class="main-header">
+        <div class="navbar-container">
+            <a href="#home" class="nav-logo">
+                <img src="server-logo.png" alt="HyperMC Logo" class="logo-img">
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="modalità.html" class="nav-link">Modalità</a>
+                <a href="regolamento.html" class="nav-link active">Regolamento</a>
+                <a href="staff.html" class="nav-link">Staff</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="ip-button" onclick="copyIP()">
+                    <span class="ip-text">hyper-mc.it</span>
+                    <span class="ip-badge">Copia</span>
+                </button>
+            </div>
+            <div>
+                <button class="hamburger-btn" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="glow-effect top-left"></div>
+<section id="rules" class="regolamento-section">
+    <div class="regolamento-header" data-aos="fade-down" data-aos-duration="800">
+        <h1>Il nostro <span class="brand-color">regolamento</span></h1>
+        <p class="regolamento-intro">La legge non ammette ignoranza: entrando su HyperMC accetti implicitamente ogni punto qui riportato.</p>
+    </div>
+
+    <div class="accordion-container">
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="100">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span><i class="fa-solid fa-users"></i> Comportamento & Chat</span>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Rispetto:</strong> È obbligatorio mantenere un comportamento corretto e rispettoso nei confronti di tutti gli utenti e dei membri dello staff.
+Non sono tollerati insulti, linguaggio offensivo, provocazioni, minacce, discriminazioni o qualsiasi altra forma di comportamento tossico, sia in chat pubblica che privata.</li>
+                    <li><strong>Spam:</strong> La chat deve essere utilizzata in modo appropriato. È vietato: Spammare messaggi, simboli o caratteri ripetuti Scrivere in CAPS LOCK in modo eccessivo, Fare flood o pubblicità non autorizzata, Diffondere link dannosi o contenuti inappropriati.  </li>
+                    <li><strong>Fair Play:</strong> La chat deve essere utilizzata in modo appropriato. È vietato: Spammare messaggi, simboli o caratteri ripetuti Scrivere in CAPS LOCK in modo eccessivo, Fare flood o pubblicità non autorizzata, Diffondere link dannosi o contenuti inappropriati.</li>
+                    <li><strong>Account e responsabilità:</strong> Ogni giocatore è responsabile del proprio account. Lo staff non è responsabile di eventuali perdite dovute a Condivisione dell’account, Accessi non autorizzati o Errori causati dall’utente.</li>
+                    <li><strong>Decisioni dello staff:</strong> Le decisioni dello staff sono da considerarsi valide e definitive. Tentativi di eludere sanzioni, discutere pubblicamente i provvedimenti o mancare di rispetto allo staff non sono consentiti. </li>
+                    <li><strong>Sanzioni:</strong> In caso di violazione di una o più regole, lo staff si avvale della facoltà di punire il trasgressore, applicando sanzioni proporzionate alla gravità dell’infrazione, che possono includere avvertimenti, mute, kick, ban temporanei o permanenti.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="250">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span><i class="fa-solid fa-shield-halved"></i> Gameplay & Survival (SMP)</span>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Furti e raid:</strong> All’interno della modalità SMP:
+
+I furti tra giocatori sono consentiti I raid alle basi sono consentiti, indipendentemente dal loro stato di protezione, salvo diversa indicazione in eventi o aree specifiche
+
+I giocatori sono pertanto responsabili della difesa delle proprie basi e dei propri beni.   </li>
+                    <li><strong>PvP e uccisioni:</strong> Il PvP è consentito, Il TP-Kill è consentito, Lo spawn kill aggravato è vietato.
+
+Per spawn kill aggravato si intende l’uccisione ripetuta e intenzionale di un giocatore appena respawnato, con lo scopo di impedirgli di giocare o allontanarsi dalla zona di spawn.</li>
+                    <li><strong>Griefing:</strong> Il griefing è parte integrante della modalità SMP ed è pertanto consentito.
+Tuttavia, sono vietate azioni che abbiano come unico scopo il danneggiamento massivo e intenzionale del server o delle sue prestazioni (es. lag machine, distruzione sistematica di grandi aree senza motivo di gioco).</li>
+                    <li><strong>Bug, exploit e cheat:</strong> È severamente vietato:
+
+Utilizzare bug o exploit del gioco o dei plugin, Abusare di meccaniche non intenzionali, Utilizzare cheat, hack o mod che forniscano vantaggi sleali.
+
+Qualsiasi abuso di questo tipo verrà sanzionato indipendentemente dal contesto SMP.</li>
+                    <li><strong>Truffe e scambi:</strong> Le truffe tra giocatori sono considerate parte del rischio della modalità SMP.
+Lo staff non è tenuto a restituire oggetti, valuta o risorse perse a seguito di scambi o accordi non rispettati tra utenti.</li>
+                    <li><strong>Aree protette ed eventi:</strong> Eventuali aree protette, zone speciali o eventi temporanei possono essere soggetti a regole aggiuntive.
+Tali regole verranno comunicate chiaramente e prevalgono su quelle generali della SMP.</li>
+                    <li><strong>Comportamenti anti–gioco:</strong> Sono vietati comportamenti volti a rovinare intenzionalmente l’esperienza di gioco altrui senza un reale scopo di gameplay, come:
+
+Persecuzione mirata e continuativa di un singolo giocatore,
+
+Ostruzione permanente del gioco altrui senza interazioni di gioco lecite.
+                    <li><strong>Intervento dello staff:</strong> Lo staff si riserva il diritto di intervenire in qualsiasi momento qualora una situazione venga ritenuta dannosa per l’esperienza generale del server, anche se non esplicitamente descritta in questo regolamento.</li>
+                    <li><strong>Sanzioni:</strong> In caso di violazione delle regole sopra elencate, lo staff si avvale della facoltà di punire il trasgressore, applicando sanzioni adeguate alla gravità dell’infrazione, fino al ban permanente nei casi più gravi.</li>
+                    <li><strong>Attenzione:</strong> l'utente e' tenuto a riportare allo staff qualsiasi comportamento che va contro le regole sopra elencate, in caso di omerta' l'utente non coinvolto verra' comunque punito.</li>   
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="400">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span><i class="fa-solid fa-hand-fist"></i> Combattimento (PvP & Knockout)</span>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Combat Log:</strong> Vietato disconnettersi durante un combattimento per salvare l'equipaggiamento. Ogni report per questo comportamento sarà considerato una violazione e verrà punito.</li>
+                    <li><strong>Spawn Kill:</strong> Non è permesso uccidere i giocatori sfruttando bug dello spawn della mappa.</li>
+                    <li><strong>Teaming:</strong> Il teaming contro altri giocatori non è permesso nelle modalità che non lo prevedono.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="accordion-item" data-aos="fade-up" data-aos-delay="550">
+            <div class="accordion-header" onclick="toggleAccordion(this)">
+                <span><i class="fa-solid fa-laptop-code"></i> Client & Modifiche Ammesse</span>
+                <i class="fa-solid fa-chevron-down arrow"></i>
+            </div>
+            <div class="accordion-content">
+                <ul>
+                    <li><strong>Hack:</strong> L'uso di Client cheat (X-ray, KillAura, Fly) porta al ban permanente.</li>
+                    <li><strong>Mod Ammesse:</strong> Optifine, Sodium, Mini-map (senza radar player) e Client Mod alternativi (es.LunarClient, Dawn Client ecc...).</li>
+                    <li><strong>Macro:</strong> Vietato l'uso di auto-clicker o macro per agevolare il gameplay.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  // Inizializza le animazioni con impostazioni fluide
+  AOS.init({
+    duration: 1000, // Durata dell'animazione in millisecondi (1 secondo)
+    once: true,     // L'animazione avviene solo la prima volta che si scrolla
+    offset: 100     // Inizia l'animazione 100px prima che l'elemento appaia a schermo
+  });
+</script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Usiamo querySelector per intercettare le classi esatte del tuo HTML
+    const hamburger = document.querySelector('.hamburger-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    console.log("Controllo elementi:", { hamburger, navMenu });
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+});
+</script>
+</body>
+</div> </section> <footer class="main-footer">
+    <div class="footer-container">
+        
+        <div class="footer-column footer-brand">
+            <a href="index.html" class="footer-logo-link">
+                <img src="server-logo.png" alt="HyperMC Logo" class="footer-logo">
+            </a>
+            <p>Il punto di riferimento per gli amanti della competizione e dei survival custom, entra a far parde della costra community da ora!</p>
+            <p class="copyright">&copy; 2026 HyperMC. Tutti i diritti riservati.</p>
+        </div>
+
+        <div class="footer-column footer-links">
+            <h3>Navigazione</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="modalità.html">Modalità</a></li>
+                <li><a href="regolamento.html">Regolamento</a></li>
+                <li><a href="staff.html">Staff</a></li>
+                <li><a href="store.html">Store</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column footer-social">
+            <h3>Community</h3>
+            <p>Rimani aggiornato su eventi, contest e novità seguendo i nostri canali ufficiali:</p>
+            <div class="social-icons">
+                <a href="https://discord.gg/j9Db7fVNSX" class="social-icon discord" target="_blank" title="Entra su Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://www.youtube.com/@hypermc_official" class="social-icon youtube" target="_blank" title="Canale Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@hypermc_official" class="social-icon tiktok" target="_blank" title="Profilo TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.twitch.tv/hypermc_network" class="social-icon twitch" target="_blank" title="Canale Twitch"><i class="fa-brands fa-twitch"></i></a>
+            </div>
+        </div>
+    </div> </footer>
+    <script src="hamburger.js"></script>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+</html>

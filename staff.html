@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HyperMC - Staff</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="hypermc_icon.png">
+</head>
+<body id="staff-page  ">
+    <header class="main-header">
+        <div class="navbar-container">
+            <a href="#home" class="nav-logo">
+                <img src="server-logo.png" alt="HyperMC Logo" class="logo-img">
+            </a>
+
+            <nav class="nav-menu">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="modalità.html" class="nav-link">Modalità</a>
+                <a href="regolamento.html" class="nav-link">Regolamento</a>
+                <a href="staff.html" class="nav-link active">Staff</a>
+                <a href="store.html" class="nav-link">Store</a>
+            </nav>
+
+            <div class="nav-actions">
+                <button class="ip-button" onclick="copyIP()">
+                    <span class="ip-text">hyper-mc.it</span>
+                    <span class="ip-badge">Copia</span>
+                </button>
+            </div>
+            <div>
+                <button class="hamburger-btn" id="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </div>
+    </header>
+    <div class="glow-effect top-left"></div>
+    <section id="staff" class="staff-section">
+    <div class="staff-header">
+        <h1>Scopri il nostro <span class="brand-color">staff</span></h1>
+        <p class="staff-intro">Il team di HyperMC lavora ogni giorno per garantirti l'esperienza di gioco migliore e più sicura possibile.</p>
+    </div>
+
+    <div class="staff-container">
+        
+        <div class="staff-card border-red" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="100">
+            <div class="staff-avatar">
+                <img src="https://mc-heads.net/body/MatMatista/130" alt="Skin Staff">
+            </div>
+            <div class="staff-info">
+                <h3>MatMatista</h3>
+                <span class="role-badge role-founder">Founder</span>
+                <p class="staff-discord"><i class="fa-brands fa-discord"></i> _matmatista_</p>
+            </div>
+        </div>
+
+        <div class="staff-card border-lightred" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300">
+            <div class="staff-avatar">
+                <img src="https://mc-heads.net/body/ilbaronos/130" alt="Skin Staff">
+            </div>
+            <div class="staff-info">
+                <h3>Owner</h3>
+                <span class="role-badge role-owner">Owner</span>
+                <p class="staff-discord"><i class="fa-brands fa-discord"></i> ilbaronos_mc</p>
+            </div>
+        </div>
+
+        <div class="staff-card border-blue" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500">
+            <div class="staff-avatar">
+                <img src="https://mc-heads.net/body/Samuelito227/130" alt="Skin Staff">
+            </div>
+            <div class="staff-info">
+                <h3>Samuelito227</h3>
+                <span class="role-badge role-srhelper">Sr.Helper</span>
+                <p class="staff-discord"><i class="fa-brands fa-discord"></i> 1ts_kr0n1x</p>
+            </div>
+        </div>
+
+        <div class="staff-card border-grey" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+            <div class="staff-avatar">
+                <img src="https://mc-heads.net/body/Fr1lah/130" alt="Skin Staff">
+            </div>
+            <div class="staff-info">
+                <h3>Fr1lah</h3>
+                <span class="role-badge role-trainee">Trainee</span>
+                <p class="staff-discord"><i class="fa-brands fa-discord"></i> gnabryx</p>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Usiamo querySelector per intercettare le classi esatte del tuo HTML
+    const hamburger = document.querySelector('.hamburger-btn');
+    const navMenu = document.querySelector('.nav-menu');
+
+    console.log("Controllo elementi:", { hamburger, navMenu });
+
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        const navLinks = navMenu.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+    }
+});
+</script>
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+  // Inizializza le animazioni con impostazioni fluide
+  AOS.init({
+    duration: 1000, // Durata dell'animazione in millisecondi (1 secondo)
+    once: true,     // L'animazione avviene solo la prima volta che si scrolla
+    offset: 100     // Inizia l'animazione 100px prima che l'elemento appaia a schermo
+  });
+</script>
+</body>
+</div> </section> <footer class="main-footer">
+    <div class="footer-container">
+        
+        <div class="footer-column footer-brand">
+            <a href="index.html" class="footer-logo-link">
+                <img src="server-logo.png" alt="HyperMC Logo" class="footer-logo">
+            </a>
+            <p>Il punto di riferimento per gli amanti della competizione e dei survival custom, entra a far parde della costra community da ora!</p>
+            <p class="copyright">&copy; 2026 HyperMC. Tutti i diritti riservati.</p>
+        </div>
+
+        <div class="footer-column footer-links">
+            <h3>Navigazione</h3>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="modalità.html">Modalità</a></li>
+                <li><a href="regolamento.html">Regolamento</a></li>
+                <li><a href="staff.html">Staff</a></li>
+                <li><a href="store.html">Store</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column footer-social">
+            <h3>Community</h3>
+            <p>Rimani aggiornato su eventi, contest e novità seguendo i nostri canali ufficiali:</p>
+            <div class="social-icons">
+                <a href="https://discord.gg/j9Db7fVNSX" class="social-icon discord" target="_blank" title="Entra su Discord"><i class="fa-brands fa-discord"></i></a>
+                <a href="https://www.youtube.com/@hypermc_official" class="social-icon youtube" target="_blank" title="Canale Youtube"><i class="fa-brands fa-youtube"></i></a>
+                <a href="https://www.tiktok.com/@hypermc_official" class="social-icon tiktok" target="_blank" title="Profilo TikTok"><i class="fa-brands fa-tiktok"></i></a>
+                <a href="https://www.twitch.tv/hypermc_network" class="social-icon twitch" target="_blank" title="Canale Twitch"><i class="fa-brands fa-twitch"></i></a>
+            </div>
+        </div>
+    </div> </footer>
+    <script src="app.js"></script>
+    <script src="script.js"></script>
+</html>
