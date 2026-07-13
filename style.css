@@ -950,7 +950,7 @@ body {
 }
 
 .accordion-item.active .accordion-content {
-    max-height: 1500px; /* Un valore abbastanza alto da contenere il testo */
+    max-height: 2500px; /* Un valore abbastanza alto da contenere il testo */
 }
 /* ==========================================
    SEZIONE STAFF (CARD 3D SKIN)
