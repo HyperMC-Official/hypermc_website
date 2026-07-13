@@ -1083,6 +1083,7 @@ body {
 .staff-card.border-red:hover { border-color: rgba(255, 42, 42, 0.5); box-shadow: 0 10px 30px rgba(255, 42, 42, 0.05); }
 .staff-card.border-lightred:hover { border-color: rgba(214, 64, 64, 0.5); box-shadow: 0 10px 30px rgba(52, 152, 219, 0.05); }
 .staff-card.border-blue:hover { border-color: rgba(46, 56, 204, 0.5); box-shadow: 0 10px 30px rgba(46, 204, 113, 0.05); }
+.staff-card.border-gray:hover { border-color: rgba(177, 177, 177, 0.5); box-shadow: 0 10px 30px rgba(46, 204, 113, 0.05); }
 /*---SEZIONE STORE COMING SOON---*/
 .coming-soon-section {
     padding: 6rem 2rem;
