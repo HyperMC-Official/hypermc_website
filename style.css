@@ -543,7 +543,7 @@ body {
 .evento-container {
     max-width: 1300px;
     margin: 0 auto;
-    background: linear-gradient(145deg, #181818, #101010);
+    background: var(--bg-card);
     border: 2px solid #ff2a2a; /* Rosso stile HyperMC */
     border-radius: 16px;
     padding: 40px;
@@ -1881,7 +1881,7 @@ body {
         font-size: 0.95rem !important;
         padding: 0 0.5rem;
     }
-.evento-apertura-section {
+    .evento-apertura-section {
         padding: 2rem 1rem 3rem 1rem;
     }
 
