@@ -1175,11 +1175,20 @@ body {
     color: #ff6969;
     border: 1px solid rgba(255, 63, 63, 0.301);
 }
-
+.role-admin {
+    background: rgba(204, 201, 46, 0.308);
+    color: #ccbc2e;
+    border: 1px solid rgba(204, 180, 46, 0.308);
+}
 .role-srhelper {
     background: rgba(46, 56, 204, 0.15);
     color: #2e4bcc;
     border: 1px solid rgba(46, 56, 204, 0.15);
+}
+.role-helper {
+    background: rgba(46, 180, 204, 0.15);
+    color: #00d9e9;
+    border: 1px solid rgba(46, 180, 204, 0.15);
 }
 .role-trainee {
     background: rgba(99, 99, 99, 0.15);
@@ -1191,6 +1200,8 @@ body {
 .staff-card.border-lightred:hover { border-color: rgba(214, 64, 64, 0.5); box-shadow: 0 10px 30px rgba(52, 152, 219, 0.05); }
 .staff-card.border-blue:hover { border-color: rgba(46, 56, 204, 0.5); box-shadow: 0 10px 30px rgba(46, 204, 113, 0.05); }
 .staff-card.border-gray:hover { border-color: rgba(177, 177, 177, 0.5); box-shadow: 0 10px 30px rgba(46, 204, 113, 0.05); }
+.staff-card.border-yellow:hover { border-color: rgba(204, 201, 46, 0.5); box-shadow: 0 10px 30px rgba(204, 201, 46, 0.05); }
+.staff-card.border-lightblue:hover { border-color: rgba(46, 180, 204, 0.5); box-shadow: 0 10px 30px rgba(46, 180, 204, 0.05); }
 /*---SEZIONE STORE COMING SOON---*/
 .coming-soon-section {
     padding: 6rem 2rem;
