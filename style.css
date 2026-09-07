@@ -37,6 +37,19 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh; /* Costringe la pagina a essere alta almeno quanto lo schermo */
+    cursor: url('freccia-rossa.png') 0 0, auto;
+}
+/* Applica la manina a TUTTI gli elementi cliccabili del sito */
+a, 
+button, 
+[role="button"], 
+input[type="submit"], 
+input[type="button"],
+.btn,        /* Classi standard per bottoni (es. Bootstrap) */
+.button, 
+[onclick],   /* Qualsiasi elemento con un click via JavaScript */
+cursor-pointer { 
+  cursor: url('manina-rossa.png') 7 0, pointer !important;
 }
 
 /* ==========================================
