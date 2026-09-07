@@ -21,6 +21,10 @@
   background-color: #ff2a2a; /* Colore dello sfondo */
   color: black;            /* Colore del testo */
 }
+::-webkit-scrollbar
+    {
+        display: none;
+    }
 
 body {
     margin: 0;
@@ -1957,4 +1961,5 @@ body {
     .evento-img {
         max-width: 170px;
     }
+    
 }
