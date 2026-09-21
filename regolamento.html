@@ -169,6 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 </script>
+<!-- POPUP NOTIFICA VOTO ANIMATO -->
+<div id="vote-notification" class="vote-notification">
+    <div class="vote-notification-body">
+        <div class="vote-icon-box">
+            <i class="fa-solid fa-gift"></i>
+        </div>
+        <div class="vote-content">
+            <p class="vote-text"><strong id="vote-player-name">Player</strong> ha appena votato!</p>
+            <a href="#sezione-vota" class="vote-action-link">Clicca per votare anche tu <i class="fa-solid fa-arrow-right"></i></a>
+        </div>
+        <button class="vote-close-btn" onclick="closeVoteNotification()" aria-label="Chiudi">&times;</button>
+    </div>
+    <!-- Barra temporizzata -->
+    <div class="vote-progress-bar" id="vote-progress-bar"></div>
+</div>
 </body>
 </div> </section> <footer class="main-footer">
     <div class="footer-container">
