@@ -157,19 +157,20 @@ window.addEventListener('scroll', function() {
 });
 
 
-// --- BLOCCO DEVTOOLS (F12) E REINDIRIZZAMENTO ---
+// --- BLOCCO DEVTOOLS (F12) CON SALVATAGGIO PAGINA CORRENTE ---
 document.addEventListener('keydown', function(e) {
-    // Intercetta F12 oppure Ctrl+Shift+I / Cmd+Option+I
     if (
         e.key === 'F12' || 
         e.keyCode === 123 || 
         (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73))
     ) {
         e.preventDefault();
-        window.location.href = 'no-access.html'; // Reindirizza alla pagina d'errore
+        
+        // Salva l'URL esatto di provenienza (inclusi eventuali #ancore o sezioni)
+        const currentPage = encodeURIComponent(window.location.href);
+        window.location.href = `no-access.html?from=${currentPage}`;
     }
 });
-
 
 // --- EFFETTO SCINTILLE ROSSE AL CLICK ---
 document.addEventListener('click', function(e) {
