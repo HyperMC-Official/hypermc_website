@@ -25,6 +25,34 @@
     {
         display: none;
     }
+/* ==========================================
+   EFFETTO SCINTILLE AL CLICK
+   ========================================== */
+
+.click-spark {
+    position: fixed;
+    pointer-events: none;
+    border-radius: 50%;
+    background-color: var(--primary-red, #ff2a2a);
+    box-shadow: 0 0 6px var(--primary-red, #ff2a2a), 0 0 10px #ffffff;
+    z-index: 999999;
+    transform: translate(-50%, -50%);
+    animation: sparkBurst 0.6s cubic-bezier(0.1, 0.8, 0.25, 1) forwards;
+}
+
+@keyframes sparkBurst {
+    0% {
+        transform: translate(-50%, -50%) translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    60% {
+        opacity: 1;
+    }
+    100% {
+        transform: translate(-50%, -50%) translate(var(--tx), var(--ty)) scale(0);
+        opacity: 0;
+    }
+}
 
 body {
     margin: 0;
@@ -188,52 +216,174 @@ cursor-pointer {
 /* ==========================================
    STILE HERO SECTION
    ========================================== */
-/* MODIFICA QUESTO NEL TUO CSS */
+
 .hero-section {
-    position: relative;             /* Ancoraggio elementi interni */
-    min-height: 85vh;              /* Altezza della sezione */
-    display: flex;                  /* Attiva il box flessibile */
-    align-items: center;            /* Centra il contenuto in verticale */
-    overflow: hidden;               /* Taglia le luci fuori schermo */
-    background-color: #121214;      /* Grigio scuro originale di base */
+    position: relative;
+    min-height: 85vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    background-color: #121214;
 }
 
-/* Spostiamo l'immagine qui sotto, così si attiva SOLO se siamo nella Home */
-#home-page .hero-section {
-    background-image: url('img-hero3.png'); /* L'immagine si carica solo nella Home */
-    background-position: calc(100% + 100px) center; /* Posiziona l'immagine */
-    background-repeat: no-repeat;   /* Impedisce la ripetizione */
-    background-size: cover;         /* Copre l'intera altezza */
+/* SFONDO IMMAGINE */
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    
+    /* Si estende da sinistra fino al bordo dei 1300px (linea verde) */
+    width: min(100%, calc(50% + 650px));
+    
+    background-image: 
+        /* SFUMATURA DESTRA: molto più leggera, parte solo dall'80% in poi */
+        linear-gradient(to right, transparent 80%, #121214 100%),
+        /* SFUMATURA SINISTRA: leggera per rendere leggibile il testo */
+        linear-gradient(to right, #121214 0%, rgba(18, 18, 20, 0.7) 20%, transparent 45%),
+        /* SFUMATURA ALTO/BASSO: Raccordo verticale */
+        linear-gradient(to bottom, #121214 0%, transparent 15%, transparent 85%, #121214 100%),
+        /* IMMAGINE DI SFONDO */
+        url('img-hero3.png');
+        
+    background-repeat: no-repeat;
+    
+    /* Posiziona l'immagine a destra e la scala SENZA tagliarla */
+    background-position: right center;
+    background-size: contain;
+    
+    z-index: 0;
 }
 
-/* MODIFICA QUESTO NEL TUO CSS */
-/* Aggiungendo #home-page prima, la sfumatura esisterà SOLO nella Home */
-#home-page .hero-section::before {
-    content: '';                    /* Genera l'elemento virtuale del velo */
-    position: absolute;             /* Lo sovrappone sopra alla sezione */
-    top: 0;                         /* Parte dal limite superiore */
-    left: 0;                        /* Parte dal limite sinistro */
-    width: 100%;                    /* Esteso su tutta la larghezza */
-    height: 100%;                   /* Esteso su tutta l'altezza */
-    /* Il gradiente originale che si attiva solo nella pagina principale */
-    background: linear-gradient(to right, #121214 0%, #121214 35%, rgba(18, 18, 20, 0.3) 70%, rgba(18, 18, 20, 0) 100%),
-                linear-gradient(to bottom, #121214 0%, transparent 15%, transparent 85%, #121214 100%);
-    z-index: 1;                     /* Sopra lo sfondo, sotto ai testi */
-}
-
+/* CONTENITORE TESTI E BOTTONI */
 .hero-container {
-    max-width: 1300px;              /* Larghezza massima del contenitore */
-    margin: 0 auto;                 /* Centra il blocco nella pagina */
-    padding: 2rem;                  /* Spazio di distacco dai bordi */
-    width: 100%;                    /* Occupa tutto lo spazio orizzontale */
-    z-index: 10;                    /* Spinge i testi sopra al velo sfumato */
+    position: relative; /* Indispensabile per ancorare i personaggi */
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 2rem;
+    width: 100%;
+    z-index: 10;
+}
+/* POSIZIONAMENTO CONTENITORE PERSONAGGI + CUBI */
+.hero-characters {
+    position: absolute;
+    bottom: -75px; 
+    right: 15%; 
+    width: 38%; 
+    max-width: 460px; 
+    z-index: 2;
+    pointer-events: none;
 }
 
-/* COLONNA SINISTRA: TESTI */
-.hero-content {
-    max-width: 600px;               /* Contiene il testo per non farlo allargare troppo */
+/* IMMAGINE PERSONAGGI (LIVELLO INTERMEDIO) */
+.hero-characters .img-personaggi {
+    width: 100%;
+    height: auto;
+    display: block;
+    position: relative;
+    z-index: 2; /* Sta SOPRA la Redstone ma SOTTO Diamante e Smeraldo */
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
 }
 
+/* STILE BASE CUBI FLUTTUANTI */
+.hero-characters .cubo {
+    position: absolute;
+    height: auto;
+    animation: floatAnimation 4s ease-in-out infinite;
+}
+
+/* 1. CUBO REDSTONE (Sulla spalla del cactus - DIETRO) */
+.hero-characters .cubo-redstone {
+    top: 20%;
+    left: -4%;
+    width: 22%;
+    z-index: 1;
+
+    /* Rotazione di partenza (prima dell'avvio dell'animazione) */
+    transform: rotate(-15deg);
+
+    /* Usa l'animazione con rotazione integrata */
+    animation: floatAnimationRedstone 3.8s ease-in-out infinite;
+    animation-delay: 0s;
+    animation-fill-mode: backwards;
+}
+
+/* 2. CUBO DIAMANTE (In basso al centro - DAVANTI) */
+.hero-characters .cubo-diamante {
+    bottom: 10%;
+    right: 40%;
+    width: 28%;
+    z-index: 3; /* z-index > 2: Va DAVANTI ai personaggi */
+    animation-duration: 4.5s;
+    animation-delay: 0.7s; /* Ritardo per sfalsare il movimento */
+}
+
+/* 3. CUBO SMERALDO (A destra - DAVANTI) */
+.hero-characters .cubo-smeraldo {
+    top: -3%;
+    right: -7%;
+    width: 21%;
+    z-index: 1; /* z-index > 2: Va DAVANTI ai personaggi */
+    transform: scaleY(-1);
+    animation: floatAnimationFlipped 4.1s ease-in-out infinite;
+    animation-delay: 1.3s;
+    animation-fill-mode: backwards;
+}
+/* ANIMAZIONE SPECCHIATA (Mantiene lo scaleX(-1) attivo durante tutta la fluttuazione) */
+@keyframes floatAnimationFlipped {
+    0% {
+        transform: scaleY(-1) translateY(0px);
+    }
+    50% {
+        transform: scaleY(-1) translateY(-15px);
+    }
+    100% {
+        transform: scaleY(-1) translateY(0px);
+    }
+}
+/* ANIMAZIONE CON ROTAZIONE PER IL CUBO ROSSO */
+@keyframes floatAnimationRedstone {
+    0% {
+        transform: rotate(-15deg) translateY(0px);
+    }
+    50% {
+        transform: rotate(-15deg) translateY(-15px);
+    }
+    100% {
+        transform: rotate(-15deg) translateY(0px);
+    }
+}
+
+/* GESTIONE MOBILE */
+@media (max-width: 992px) {
+    .hero-characters {
+        position: relative;
+        width: 80%;
+        max-width: 400px;
+        margin: 30px auto 0 auto;
+        right: auto;
+        bottom: 0;
+    }
+}
+
+.hero-characters img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.7));
+}
+
+/* Gestione dispositivi mobili / schermi piccoli */
+@media (max-width: 992px) {
+    .hero-characters {
+        position: relative;
+        width: 80%;
+        max-width: 400px;
+        margin: 30px auto 0 auto;
+        right: auto;
+    }
+}
 .hero-title {
     font-size: 4rem;                /* Grandezza del titolo principale */
     font-weight: 700;                /* Spessore del carattere in grassetto */
@@ -296,28 +446,6 @@ cursor-pointer {
     border-color: var(--primary-red);
     background-color: rgba(255, 42, 42, 0.05);
     transform: translateY(-3px);
-}
-
-/* AMBIENT GLOW (LUCI DI SFONDO) */
-.glow-effect {
-    position: absolute;
-    width: 400px;
-    height: 400px;
-    background: radial-gradient(circle, rgba(255, 42, 42, 0.15) 0%, rgba(0,0,0,0) 70%);
-    border-radius: 50%;
-    filter: blur(60px);
-    z-index: 1;
-    pointer-events: none; /* Evita che le luci blocchino i click sui bottoni */
-}
-
-.glow-effect.top-left {
-    top: -10%;
-    left: -10%;
-}
-
-.glow-effect.bottom-right {
-    bottom: 10%;
-    right: -10%;
 }
 
 /* ==========================================
@@ -1614,6 +1742,153 @@ cursor-pointer {
     0% { box-shadow: 0 8px 25px rgba(255, 42, 42, 0.2); }
     100% { box-shadow: 0 10px 35px rgba(255, 42, 42, 0.5); }
 }
+/* ==========================================
+   MENU TASTO DESTRO HYPERMC
+   ========================================== */
+.context-menu {
+    position: fixed;
+    background-color: #1a1a1e;
+    border: 2px solid var(--primary-red, #ff2a2a);
+    border-radius: 12px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.7);
+    z-index: 999999;
+    padding: 8px 0;
+    min-width: 210px;
+    overflow: hidden;
+
+    /* ANIMAZIONE INGRESSO */
+    opacity: 0;
+    transform: scale(0.85);
+    transform-origin: top left;
+    pointer-events: none;
+    transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), 
+                transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.context-menu.attivo {
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: auto;
+}
+
+.context-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.context-menu ul li a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 18px;
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.context-menu ul li a:hover {
+    background-color: var(--primary-red, #ff2a2a);
+    color: #ffffff;
+}
+
+.context-menu i {
+    width: 18px;
+    text-align: center;
+    color: var(--primary-red, #ff2a2a);
+    transition: color 0.2s ease;
+}
+
+.context-menu ul li a:hover i {
+    color: #ffffff;
+}
+
+/* DIVISORI TRA LE SEZIONI */
+.context-menu .menu-divider {
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 6px 0;
+}
+/* ==========================================
+   PAGINA ACCESSO NEGATO (NO-ACCESS)
+   ========================================== */
+
+.no-access-body {
+    background-color: #121214;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.no-access-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.no-access-image {
+    flex: 1;
+    max-width: 450px;
+}
+
+.no-access-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.8));
+}
+
+.no-access-content {
+    flex: 1;
+}
+
+.no-access-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 2rem;
+}
+
+.no-access-content h1 .brand-color {
+    color: var(--primary-red, #ff2a2a);
+    text-shadow: 0 0 20px rgba(255, 42, 42, 0.4);
+}
+
+.no-access-content .btn {
+    display: inline-flex;
+    text-decoration: none;
+}
+
+/* RESPONSIVE SMARTPHONE E TABLET */
+@media (max-width: 768px) {
+    .no-access-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 2rem;
+    }
+
+    .no-access-image {
+        max-width: 280px;
+    }
+
+    .no-access-content h1 {
+        font-size: 2rem;
+    }
+
+    .no-access-content .btn {
+        justify-content: center;
+    }
+}
 /* ==========================================================================
    REGOLE PER MOBILE (Schermi inferiori a 768px)
    ========================================================================== */
@@ -1735,73 +2010,75 @@ cursor-pointer {
     .nav-link:hover, .nav-link.active {
         color: var(--primary-red) !important;
     }
-    /* ==========================================================================
-       HERO SECTION MOBILE
-       ========================================================================== */
-
     .hero-section {
-        min-height: 70vh !important; /* Riduce l'altezza per non occupare tutto lo schermo */
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        text-align: center !important; /* Centra tutti i testi su mobile */
+        min-height: auto;
+        padding: 4rem 0 2.5rem 0;
+        text-align: center;
     }
 
-    #home-page .hero-section {
-        background-position: 75% !important; /* Centra l'immagine di sfondo */
-        background-size: cover !important;
-    }
-
-    /* Cambiamo il gradiente: ora scurisce dall'alto verso il basso per proteggere il testo */
-    #home-page .hero-section::before {
-        background: linear-gradient(to bottom, 
-            rgba(18, 18, 20, 0.85) 0%, 
-            rgba(18, 18, 20, 0.7) 50%, 
-            #121214 100%) !important;
+    /* SFONDO CORRETTO: Copre l'intero contenitore senza rimpicciolirsi */
+    .hero-section::after {
+        width: 100%;
+        height: 100%;
+        background-size: cover;       /* Copre tutta l'area dello sfondo */
+        background-position: center;  /* Centra il punto focale dell'immagine */
+        opacity: 0.25;                /* Garantisce la leggibilità del testo sopra */
     }
 
     .hero-container {
-        padding: 2rem 1.5rem !important;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
 
-    .hero-content {
-        max-width: 100% !important;
-        margin: 0 auto !important;
-    }
-
-    /* Rimpiccioliamo il titolo da 4rem per non farlo andare a capo in 5 righe */
     .hero-title {
-        font-size: 2.2rem !important; 
-        line-height: 1.2 !important;
-        margin-bottom: 1rem !important;
+        font-size: 2.5rem;
     }
 
     .hero-subtitle {
-        font-size: 1rem !important;
-        margin-bottom: 2rem !important;
-        max-width: 100% !important;
+        font-size: 1rem;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 2rem;
     }
 
-    /* Mettiamo i bottoni uno sotto l'altro o ben distanziati */
+    /* I bottoni si dispongono in verticale centrati */
     .hero-buttons {
-        flex-direction: column !important; /* Incolonna i due bottoni */
-        gap: 1rem !important;
+        flex-direction: column;
         width: 100%;
-        max-width: 320px; /* Evita che i bottoni diventino larghi quanto tutto lo schermo */
-        margin: 0 auto !important; /* Centra il blocco bottoni */
+        max-width: 320px;
+        gap: 1rem;
     }
 
     .btn {
-        width: 100% !important; /* Forza i bottoni a prendere tutta la larghezza del contenitore */
-        justify-content: center !important; /* Centra il testo all'interno del bottone */
-        padding: 0.8rem 1.5rem !important;
+        width: 100%;
+        justify-content: center;
     }
 
-    /* Rimpiccioliamo i bagliori per evitare artefatti grafici fastidiosi sui display piccoli */
-    .glow-effect {
-        width: 200px !important;
-        height: 200px !important;
-        opacity: 0.5;
+    /* I personaggi scendono sotto il testo */
+    .hero-characters {
+        position: relative;
+        width: 80%;
+        max-width: 350px;
+        margin: 2.5rem auto 0 auto;
+        right: auto;
+        bottom: 0;
+    }
+
+    /* Scala e riposizionamento proporzionale dei cubi */
+    .hero-characters .cubo-redstone { 
+        left: -1%; 
+        width: 20%; 
+    }
+
+    .hero-characters .cubo-diamante { 
+        right: 32%; 
+        width: 25%; 
+    }
+
+    .hero-characters .cubo-smeraldo { 
+        right: -2%; 
+        width: 19%; 
     }
     /* ==========================================================================
        FEATURE CARDS MOBILE INTERNE

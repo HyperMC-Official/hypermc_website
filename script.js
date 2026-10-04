@@ -108,3 +108,99 @@ window.addEventListener('DOMContentLoaded', () => {
         scheduleNextNotification();
     }, 4000);
 });
+
+
+
+// --- MENU TASTO DESTRO PERSONALIZZATO ---
+document.addEventListener('contextmenu', function(e) {
+    const contextMenu = document.getElementById('custom-context-menu');
+    if (!contextMenu) return;
+
+    e.preventDefault();
+
+    let x = e.clientX;
+    let y = e.clientY;
+
+    const menuWidth = 210;
+    const menuHeight = 290;
+    const windowWidth = window.innerWidth;
+    const windowHeight = window.innerHeight;
+
+    /* Evita che il menu esca dai bordi dello schermo */
+    if (x + menuWidth > windowWidth) {
+        x = windowWidth - menuWidth - 10;
+        contextMenu.style.transformOrigin = 'top right';
+    } else {
+        contextMenu.style.transformOrigin = 'top left';
+    }
+
+    if (y + menuHeight > windowHeight) {
+        y = windowHeight - menuHeight - 10;
+    }
+
+    contextMenu.style.left = `${x}px`;
+    contextMenu.style.top = `${y}px`;
+    contextMenu.classList.add('attivo');
+});
+
+// Chiudi il menu se si clicca fuori o si fa scroll
+document.addEventListener('click', function(e) {
+    const contextMenu = document.getElementById('custom-context-menu');
+    if (contextMenu && !contextMenu.contains(e.target)) {
+        contextMenu.classList.remove('attivo');
+    }
+});
+
+window.addEventListener('scroll', function() {
+    const contextMenu = document.getElementById('custom-context-menu');
+    contextMenu?.classList.remove('attivo');
+});
+
+
+// --- BLOCCO DEVTOOLS (F12) E REINDIRIZZAMENTO ---
+document.addEventListener('keydown', function(e) {
+    // Intercetta F12 oppure Ctrl+Shift+I / Cmd+Option+I
+    if (
+        e.key === 'F12' || 
+        e.keyCode === 123 || 
+        (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.keyCode === 73))
+    ) {
+        e.preventDefault();
+        window.location.href = 'no-access.html'; // Reindirizza alla pagina d'errore
+    }
+});
+
+
+// --- EFFETTO SCINTILLE ROSSE AL CLICK ---
+document.addEventListener('click', function(e) {
+    const sparkCount = 12; // Numero di scintille generate ad ogni click
+
+    for (let i = 0; i < sparkCount; i++) {
+        const spark = document.createElement('div');
+        spark.classList.add('click-spark');
+
+        // Posizione esatta del cursor
+        spark.style.left = `${e.clientX}px`;
+        spark.style.top = `${e.clientY}px`;
+
+        // Calcolo di una traiettoria casuale a 360 gradi
+        const angle = Math.random() * Math.PI * 2;
+        const distance = 30 + Math.random() * 50; // Distanza dell'esplosione
+        const tx = Math.cos(angle) * distance;
+        const ty = Math.sin(angle) * distance;
+        const size = 3 + Math.random() * 4; // Dimensioni variabili (3px - 7px)
+
+        // Passiamo i valori calcolati al CSS tramite variabili custom
+        spark.style.setProperty('--tx', `${tx}px`);
+        spark.style.setProperty('--ty', `${ty}px`);
+        spark.style.width = `${size}px`;
+        spark.style.height = `${size}px`;
+
+        document.body.appendChild(spark);
+
+        // Rimuove la scintilla dal DOM al termine dell'animazione
+        setTimeout(() => {
+            spark.remove();
+        }, 600);
+    }
+});
