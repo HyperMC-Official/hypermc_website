@@ -205,3 +205,59 @@ document.addEventListener('click', function(e) {
         }, 600);
     }
 });
+
+
+// ==========================================
+// CONTROLLO SIDE DRAWER FAQ
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+    const drawer = document.getElementById('faq-drawer');
+    const overlay = document.getElementById('faq-overlay');
+    const closeBtn = document.getElementById('faq-close-btn');
+    const navTrigger = document.getElementById('faq-nav-trigger');
+    const floatBtn = document.getElementById('faq-floating-btn');
+
+    // Funzione Apri
+    function openFAQ(e) {
+        if (e) e.preventDefault();
+        drawer.classList.add('open');
+        overlay.classList.add('active');
+    }
+
+    // Funzione Chiudi
+    function closeFAQ() {
+        drawer.classList.remove('open');
+        overlay.classList.remove('active');
+    }
+
+    // Event Listener per apertura
+    if (navTrigger) navTrigger.addEventListener('click', openFAQ);
+    if (floatBtn) floatBtn.addEventListener('click', openFAQ);
+
+    // Event Listener per chiusura
+    if (closeBtn) closeBtn.addEventListener('click', closeFAQ);
+    if (overlay) overlay.addEventListener('click', closeFAQ);
+
+    // Chiudi premendo il tasto ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && drawer.classList.contains('open')) {
+            closeFAQ();
+        }
+    });
+
+    // Gestione Accordion interno
+    const faqItems = document.querySelectorAll('.faq-drawer .faq-item');
+
+    faqItems.forEach(item => {
+        const btn = item.querySelector('.faq-question');
+        btn.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+
+            faqItems.forEach(other => other.classList.remove('active'));
+
+            if (!isActive) {
+                item.classList.add('active');
+            }
+        });
+    });
+});
