@@ -261,3 +261,58 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+
+
+// ==========================================
+// WIKI HYPERMC (SCROLLSPY & MULTILINGUA)
+// ==========================================
+document.addEventListener('DOMContentLoaded', () => {
+
+    // 1. SCROLLSPY (Evidenzia categoria durante lo scorrimento)
+    const sections = document.querySelectorAll('.wiki-section');
+    const sidebarLinks = document.querySelectorAll('.sidebar-link');
+
+    window.addEventListener('scroll', () => {
+        let currentSectionId = '';
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - 120;
+            const sectionHeight = section.clientHeight;
+
+            if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
+                currentSectionId = section.getAttribute('id');
+            }
+        });
+
+        sidebarLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${currentSectionId}`) {
+                link.classList.add('active');
+            }
+        });
+    });
+
+    // 2. SISTEMA MULTILINGUA (IT / EN)
+    const langBtns = document.querySelectorAll('.lang-btn');
+
+    langBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            const selectedLang = btn.getAttribute('data-lang');
+
+            // Cambia stato attivo sui pulsanti
+            langBtns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+
+            // Cerca tutti gli elementi con traduzione data-it / data-en
+            const translatableElements = document.querySelectorAll('[data-' + selectedLang + ']');
+
+            translatableElements.forEach(el => {
+                const translation = el.getAttribute(`data-${selectedLang}`);
+                if (translation) {
+                    el.innerText = translation;
+                }
+            });
+        });
+    });
+});
