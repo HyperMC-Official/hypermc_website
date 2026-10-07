@@ -2053,22 +2053,34 @@ cursor-pointer {
     padding-top: 15px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
-
-.wiki-redirect-link {
-    display: inline-flex;
+/* Bottone Circolare Wiki Flottante */
+.wiki-float-btn {
+    position: fixed;
+    bottom: 25px;
+    right: 120px; /* Posizionato subito a sinistra del bottone FAQ */
+    width: 45px;
+    height: 45px;
+    background: #141414;
+    border: 2px solid #ff2a2a;
+    color: #ffffff;
+    border-radius: 50%;
+    display: flex;
     align-items: center;
-    gap: 10px;
-    color: #ffaa00; /* Modifica con il colore accent del tuo sito */
-    font-weight: 600;
+    justify-content: center;
     font-size: 1.1rem;
     text-decoration: none;
-    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    z-index: 9990;
+    transition: all 0.25s ease;
 }
 
-.wiki-redirect-link:hover {
+.wiki-float-btn:hover {
+    background: #ff2a2a;
     color: #ffffff;
-    transform: translateY(-2px);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 4px 15px rgba(255, 42, 42, 0.5);
 }
+
 /* ==========================================
    WIKI HYPERMC (LAYOUT & STILE FOGLIO)
    ========================================== */
