@@ -1317,7 +1317,6 @@ cursor-pointer {
     width: 100%;
     max-width: 1100px;
     display: grid;
-    /* Crea colonne automatiche che si adattano allo schermo (minimo 280px l'una) */
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
     justify-items: center;
@@ -1333,7 +1332,7 @@ cursor-pointer {
     max-width: 320px;
     text-align: center;
     position: relative;
-    overflow: visible; /* Permette alla testa della skin di sbordare leggermente all'hover se si vuole */
+    overflow: visible;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
@@ -1348,11 +1347,11 @@ cursor-pointer {
     height: 160px;
     object-fit: contain;
     transition: transform 0.4s ease;
-    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5)); /* Ombra sotto la skin */
+    filter: drop-shadow(0 10px 15px rgba(0, 0, 0, 0.5));
 }
 
 .staff-card:hover .staff-avatar img {
-    transform: scale(1.1); /* Zooma e solleva la skin quando ci passi sopra */
+    transform: scale(1.1);
 }
 
 /* INFO TESTUALI */
@@ -1370,51 +1369,57 @@ cursor-pointer {
 }
 
 .staff-discord i {
-    color: #5865F2; /* Colore ufficiale del brand Discord */
+    color: #5865F2;
     margin-right: 5px;
 }
 
 /* BADGE DEI RUOLI */
-.role-badge {
+.staff-info .role-badge {
     display: inline-block;
-    padding: 0.3rem 1rem;
+    padding: 0.4rem 1.1rem;
     border-radius: 20px;
-    font-size: 0.75rem;
-    font-weight: 700;
+    font-size: 0.85rem;
+    font-weight: 750;
     text-transform: uppercase;
     letter-spacing: 1px;
-}
-/* COLORI DEI RUOLI */
-.role-founder {
-    background: rgba(255, 42, 42, 0.15);
-    color: #ff2a2a;
-    border: 1px solid rgba(255, 42, 42, 0.3);
+    box-sizing: border-box;
 }
 
-.role-owner {
-    background: rgba(255, 63, 63, 0.301);
-    color: #ff6969;
-    border: 1px solid rgba(255, 63, 63, 0.301);
+/* COLORI DEI RUOLI (CON RIFERIMENTO DIRETTO PER EVITARE EFFETTO NERO) */
+.staff-info .role-badge.role-founder {
+    background: rgba(255, 42, 42, 0.2) !important;
+    color: #ff4d4d !important;
+    border: 1px solid #ff2a2a !important;
 }
-.role-admin {
-    background: rgba(204, 201, 46, 0.308);
-    color: #ccbc2e;
-    border: 1px solid rgba(204, 180, 46, 0.308);
+
+.staff-info .role-badge.role-owner {
+    background: rgba(255, 105, 105, 0.2) !important;
+    color: #ff6969 !important;
+    border: 1px solid #ff6969 !important;
 }
-.role-srhelper {
-    background: rgba(46, 56, 204, 0.15);
-    color: #2e4bcc;
-    border: 1px solid rgba(46, 56, 204, 0.15);
+
+.staff-info .role-badge.role-admin {
+    background: rgba(241, 196, 15, 0.2) !important;
+    color: #f1c40f !important;
+    border: 1px solid #f1c40f !important;
 }
-.role-helper {
-    background: rgba(46, 180, 204, 0.15);
-    color: #00d9e9;
-    border: 1px solid rgba(46, 180, 204, 0.15);
+
+.staff-info .role-badge.role-srhelper {
+    background: rgba(46, 75, 204, 0.2) !important;
+    color: #5d78ff !important;
+    border: 1px solid #2e4bcc !important;
 }
-.role-trainee {
-    background: rgba(99, 99, 99, 0.15);
-    color: #999999;
-    border: 1px solid rgba(99, 99, 99, 0.15);
+
+.staff-info .role-badge.role-helper {
+    background: rgba(0, 217, 233, 0.2) !important;
+    color: #00d9e9 !important;
+    border: 1px solid #00d9e9 !important;
+}
+
+.staff-info .role-badge.role-trainee {
+    background: rgba(153, 153, 153, 0.2) !important;
+    color: #cccccc !important;
+    border: 1px solid #888888 !important;
 }
 /* COLORI DEI BORDI ALL'HOVER (ILLUMINAZIONE SPECIFICA) */
 .staff-card.border-red:hover { border-color: rgba(255, 42, 42, 0.5); box-shadow: 0 10px 30px rgba(255, 42, 42, 0.05); }
